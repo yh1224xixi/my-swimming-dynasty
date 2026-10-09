@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 700" fill="none">
+  <defs>
+    <linearGradient id="water" x1="90" y1="100" x2="670" y2="630" gradientUnits="userSpaceOnUse"><stop stop-color="#167b9c"/><stop offset=".55" stop-color="#0c415c"/><stop offset="1" stop-color="#081d32"/></linearGradient>
+    <linearGradient id="edge" x1="110" y1="0" x2="630" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="#29526a"/><stop offset=".5" stop-color="#abc5cd"/><stop offset="1" stop-color="#244457"/></linearGradient>
+    <pattern id="tiles" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" stroke="#9cdae5" stroke-opacity=".09"/></pattern>
+    <pattern id="rope" width="22" height="14" patternUnits="userSpaceOnUse"><rect width="11" height="8" y="3" rx="3" fill="#e8bd69"/><rect x="11" width="11" height="8" y="3" rx="3" fill="#243c4b"/></pattern>
+    <filter id="shadow"><feGaussianBlur stdDeviation="20"/></filter>
+  </defs>
+  <ellipse cx="380" cy="578" rx="264" ry="50" fill="#000" opacity=".35" filter="url(#shadow)"/>
+  <g transform="translate(380 335) rotate(-23) skewX(8) translate(-380 -335)">
+    <rect x="103" y="91" width="554" height="508" rx="23" fill="#071827" stroke="#173749" stroke-width="2"/>
+    <rect x="113" y="82" width="534" height="500" rx="19" fill="url(#edge)"/>
+    <rect x="132" y="101" width="496" height="462" rx="6" fill="url(#water)"/>
+    <rect x="132" y="101" width="496" height="462" rx="6" fill="url(#tiles)"/>
+    <g stroke="#071d30" stroke-width="6" opacity=".55">
+      <path d="M145 145H614M145 237H614M145 329H614M145 421H614M145 513H614"/>
+      <path d="M157 131V159M603 131V159M157 223V251M603 223V251M157 315V343M603 315V343M157 407V435M603 407V435M157 499V527M603 499V527"/>
+    </g>
+    <g fill="url(#rope)"><rect x="133" y="184" width="495" height="14" rx="5"/><rect x="133" y="276" width="495" height="14" rx="5"/><rect x="133" y="368" width="495" height="14" rx="5"/><rect x="133" y="460" width="495" height="14" rx="5"/></g>
+    <g stroke="#72ddeb" stroke-opacity=".2" stroke-width="2"><path d="M184 116q84 18 143 0t156 2M228 210q72 18 130 0t167 0M158 349q91 20 160 0t178 0M246 451q66-15 139 0t153 0M203 546q97-16 165 0t164 0"/></g>
+    <g fill="#d9e2df" stroke="#738b92" stroke-width="2"><rect x="105" y="128" width="30" height="34" rx="3"/><rect x="105" y="220" width="30" height="34" rx="3"/><rect x="105" y="312" width="30" height="34" rx="3"/><rect x="105" y="404" width="30" height="34" rx="3"/><rect x="105" y="496" width="30" height="34" rx="3"/></g>
+    <g font-family="sans-serif" font-size="12" font-weight="700" fill="#153644"><text x="116" y="151">1</text><text x="116" y="243">2</text><text x="116" y="335">3</text><text x="116" y="427">4</text><text x="116" y="519">5</text></g>
+    <g transform="translate(397 328)">
+      <ellipse cx="-37" cy="0" rx="60" ry="17" fill="#8de6ef" opacity=".12"/>
+      <path d="M-63-12q25-12 50 0M-83 7q32 15 57 3M-97-6q25-8 45-3" stroke="#9de5ef" stroke-width="2" opacity=".65"/>
+      <path d="M-18-2l-33-6m33 8-30 12" stroke="#e4a987" stroke-width="5" stroke-linecap="round"/>
+      <path d="M-15 0H12" stroke="#f6c2a0" stroke-width="12" stroke-linecap="round"/>
+      <path d="M0-5l15-23 23 5M2 5l21 15 20-9" stroke="#f6c2a0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="20" cy="0" r="8" fill="#eff4e9"/><path d="M21-6l4 12" stroke="#153a55" stroke-width="3"/>
+      <path d="M-13-7v14" stroke="#08364e" stroke-width="10"/>
+      <path d="M48-24l7-3m-8 9h9M47 17l6 4" stroke="#c3f6f8" stroke-width="2" opacity=".7"/>
+    </g>
+    <g transform="translate(255 145)" opacity=".55"><path d="M-32 0H8" stroke="#edd1bd" stroke-width="9" stroke-linecap="round"/><circle cx="17" r="6" fill="#edc067"/><path d="M-14-3l12-19 22 5M-13 3l14 14 19-3" stroke="#edd1bd" stroke-width="4" stroke-linecap="round"/></g>
+  </g>
+  <g font-family="system-ui,sans-serif"><text x="546" y="132" fill="#70a9bf" font-size="10" letter-spacing="3">THE NEXT CHAMPION</text><path d="M546 145h112" stroke="#274e61"/><text x="104" y="640" fill="#49768c" font-size="11" letter-spacing="4">EVERY SECOND COUNTS.</text></g>
+</svg>
