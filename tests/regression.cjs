@@ -89,6 +89,8 @@ console.log(evalGame(`(()=>{
   ok('retirement completed',!!G.p.retired);
   ok('age extension bounded',retireExtCount(G.p)<=5);
   save();const saved=load();ok('retirement persists',saved.p.retired.why===G.p.retired.why);
+  const lg=legendOf(G.p);ok('swim legend keeps tier for posters',lg.legend.t===lg.tier);
+  retireFinalModal(lg,false);ok('retirement modal has a complete tier label',!$('#modalBox').textContent.includes('undefined')&&!$('#modalBox').textContent.includes('NaN'));closeModal();
   const views=['hub','train','cal','rank','rec','biz','gear','ach','nats','scout','invest'];
   for(const view of views){VIEW=view;render();ok('view '+view,!$('#view').textContent.includes('undefined')&&!$('#view').textContent.includes('NaN'));}
   return {weeks:runs,year:yearOf(G.week),age:ageOf(G.p),retirement:G.p.retired.why,extensions,elapsedMs:Date.now()-start,history:G.world.swimV10.seasonRows.length};
