@@ -15,6 +15,7 @@ const result=evalGame(`(()=>{
   Object.assign(WIZ,{name:'回归测试',nat:'CN',sex:'M',sys:'cn',age:19,main:100,cat:'sprint',rtype:'allrd',pa:162,gc:'std',extra:{},prov:'广东队'});
   newGame();migrate();
   ok('first-year history initialized',G.world.swimV10.lastYear===BASE_YEAR);
+  ok('simulation no-show text uses simulation policy',evNoShowWhy(G.p,200,{signup:'all'}).includes(policyName('signup','all')));
   const before=G.p.money,quote=trainCostOf(G.p,'accel',2),log=doTrain('accel',2);
   markTrained(G.p,'accel',2,false,log);
   ok('training quote = cash = ledger = result',before-G.p.money===quote && log.cost===quote && G.p.ledger.oc.train===quote && trainResultText(G.p,'accel',2,log).cost===quote);

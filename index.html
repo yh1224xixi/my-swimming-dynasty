@@ -11343,6 +11343,7 @@ function* advanceRunSteps(n, cont){
     /* 第 39 轮：分项目的成绩与情况（副项也在里头）—— 报告里单独成块。
        ※ 第 103 轮：接力也已经并进这一份（relayEvStatsIn 追加在末尾），
          所以「各项目」块与「最佳成绩」行读的是**同一份采集**，不会两个数对不上。 */
+    simPolicy: Object.assign({}, simPolicyOf(P)),
     evs: evStatsIn(P, snap.resWk0, snap),
     relay: relayStatsIn(P, snap.resWk0),
     sideN: sideCount(P), load: sideLoad(P)
@@ -12373,9 +12374,10 @@ function meetCountOf(rows){
    玩家真正要的是「我开了副项，为什么一场都跑不了」。
    ※ 只讲**能查证的**原因；查不清就回退到通用句，绝不编造。
    ※ 走 policyShowOf（显示口径）—— 委托了报名就显示「经纪安排」，与主控台同一句话。 */
-function evNoShowWhy(p, ev){
-  const v = policyShowOf(p, 'signup');
+function evNoShowWhy(p, ev, simPolicy){
+  const v = simPolicy ? simPolicy.signup : policyShowOf(p, 'signup');
   const n = policyName('signup', v);
+  if(simPolicy) return '本段模拟采用「'+n+'」；实际出场还取决于赛程、资格、资金、体能和伤病。';
   if(v === 'off')  return '报名策略现在是「'+n+'」—— 改成「主项优先」以上才会自动报上';
   /* ※ 第 39 轮：'main' 已经会「主项没赛事时回退副项」了，所以这里**不能再写「没轮到它」**
      （那是旧口径，现在副项是被「主项那周有赛事」挤掉的）。要讲清楚这个机制，
@@ -28826,7 +28828,7 @@ function renderHome(){
     /* ※※ 第 145 轮：v99 → v100（接力三条：名不对国校正 / 三项属性与能力挂钩 /
        名单显示 SB 与 PB，详见 30_ui.js CHANGELOG 与代码内 145 注释）。
        版本号是玩家唯一能确认「我打开的是不是新版」的锚点 —— 不动它，改了什么都说不清。 */
-    '<div class="hmfoot">v100 · 零依赖 · 打开即玩</div>'+
+    '<div class="hmfoot">V10.1 · 零依赖 · 打开即玩</div>'+
   '</div>';
 
   /* 开新档：**当前槽位**有档才要二次确认（覆盖不可恢复）。
@@ -31419,7 +31421,7 @@ function advEvBlock(S){
     } else if(!x.shots){
       /* ※ 副项开了却一场没跑 = 钱花了没响 —— 必须说清**为什么**，
          让玩家知道该改哪一个设置（讲不出原因的报告等于没报告）。 */
-      d = '<span style="color:var(--txt3)">这段时间没有出场 —— '+esc(evNoShowWhy(p, x.ev))+'</span>';
+      d = '<span style="color:var(--txt3)">这段时间没有出场 —— '+esc(evNoShowWhy(p, x.ev, S.simPolicy))+'</span>';
     } else {
       const gain = (x.pb0!=null && x.pb1!=null && x.pb0 - x.pb1 > 1e-9)
         ? ' <b style="color:var(--grn)">'+x.pb0.toFixed(2)+' → '+x.pb1.toFixed(2)+
