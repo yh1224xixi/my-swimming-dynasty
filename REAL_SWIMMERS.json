@@ -1,0 +1,543 @@
+{
+  "description": "Selected real-world swimmer names. Game birth-year, specialty and ability are simulated parameters and not authoritative biographies. Not a complete or up-to-date worldwide active roster.",
+  "source": "https://www.worldaquatics.com/competitions/4725/world-aquatics-championships-singapore-2025/results",
+  "count": 67,
+  "entries": [
+    {
+      "name": "潘展乐",
+      "nation": "CN",
+      "sex": "M",
+      "simBirth": 2004,
+      "simPrimary": 100,
+      "simLevel": 19.5
+    },
+    {
+      "name": "David Popovici",
+      "nation": "RO",
+      "sex": "M",
+      "simBirth": 2004,
+      "simPrimary": 200,
+      "simLevel": 19.4
+    },
+    {
+      "name": "Kyle Chalmers",
+      "nation": "AU",
+      "sex": "M",
+      "simBirth": 1998,
+      "simPrimary": 100,
+      "simLevel": 18.7
+    },
+    {
+      "name": "Léon Marchand",
+      "nation": "FR",
+      "sex": "M",
+      "simBirth": 2002,
+      "simPrimary": 200,
+      "simLevel": 18.9
+    },
+    {
+      "name": "Jack Alexy",
+      "nation": "US",
+      "sex": "M",
+      "simBirth": 2003,
+      "simPrimary": 100,
+      "simLevel": 18.6
+    },
+    {
+      "name": "Caeleb Dressel",
+      "nation": "US",
+      "sex": "M",
+      "simBirth": 1996,
+      "simPrimary": 60,
+      "simLevel": 18.4
+    },
+    {
+      "name": "Thomas Ceccon",
+      "nation": "IT",
+      "sex": "M",
+      "simBirth": 2001,
+      "simPrimary": 100,
+      "simLevel": 18.7
+    },
+    {
+      "name": "Hubert Kós",
+      "nation": "HU",
+      "sex": "M",
+      "simBirth": 2003,
+      "simPrimary": 200,
+      "simLevel": 18.6
+    },
+    {
+      "name": "Kristóf Milák",
+      "nation": "HU",
+      "sex": "M",
+      "simBirth": 2000,
+      "simPrimary": 200,
+      "simLevel": 18.8
+    },
+    {
+      "name": "Josh Liendo",
+      "nation": "CA",
+      "sex": "M",
+      "simBirth": 2002,
+      "simPrimary": 100,
+      "simLevel": 18.5
+    },
+    {
+      "name": "Maxime Grousset",
+      "nation": "FR",
+      "sex": "M",
+      "simBirth": 1999,
+      "simPrimary": 100,
+      "simLevel": 18.4
+    },
+    {
+      "name": "Cameron McEvoy",
+      "nation": "AU",
+      "sex": "M",
+      "simBirth": 1994,
+      "simPrimary": 60,
+      "simLevel": 18.5
+    },
+    {
+      "name": "Ben Proud",
+      "nation": "GB",
+      "sex": "M",
+      "simBirth": 1994,
+      "simPrimary": 60,
+      "simLevel": 18.4
+    },
+    {
+      "name": "Jordan Crooks",
+      "nation": "KY",
+      "sex": "M",
+      "simBirth": 2002,
+      "simPrimary": 60,
+      "simLevel": 18.4
+    },
+    {
+      "name": "Nicolò Martinenghi",
+      "nation": "IT",
+      "sex": "M",
+      "simBirth": 1999,
+      "simPrimary": 100,
+      "simLevel": 18.1
+    },
+    {
+      "name": "Adam Peaty",
+      "nation": "GB",
+      "sex": "M",
+      "simBirth": 1994,
+      "simPrimary": 100,
+      "simLevel": 18.3
+    },
+    {
+      "name": "Qin Haiyang",
+      "nation": "CN",
+      "sex": "M",
+      "simBirth": 1999,
+      "simPrimary": 200,
+      "simLevel": 18.6
+    },
+    {
+      "name": "Zhang Yufei",
+      "nation": "CN",
+      "sex": "F",
+      "simBirth": 1998,
+      "simPrimary": 100,
+      "simLevel": 18.6
+    },
+    {
+      "name": "Wang Shun",
+      "nation": "CN",
+      "sex": "M",
+      "simBirth": 1994,
+      "simPrimary": 200,
+      "simLevel": 18.3
+    },
+    {
+      "name": "Xu Jiayu",
+      "nation": "CN",
+      "sex": "M",
+      "simBirth": 1995,
+      "simPrimary": 100,
+      "simLevel": 18.3
+    },
+    {
+      "name": "Sunwoo Hwang",
+      "nation": "KR",
+      "sex": "M",
+      "simBirth": 2003,
+      "simPrimary": 200,
+      "simLevel": 18.3
+    },
+    {
+      "name": "Tomoru Honda",
+      "nation": "JP",
+      "sex": "M",
+      "simBirth": 2001,
+      "simPrimary": 200,
+      "simLevel": 18.1
+    },
+    {
+      "name": "Daiya Seto",
+      "nation": "JP",
+      "sex": "M",
+      "simBirth": 1994,
+      "simPrimary": 200,
+      "simLevel": 17.9
+    },
+    {
+      "name": "Carson Foster",
+      "nation": "US",
+      "sex": "M",
+      "simBirth": 2001,
+      "simPrimary": 400,
+      "simLevel": 18.1
+    },
+    {
+      "name": "Bobby Finke",
+      "nation": "US",
+      "sex": "M",
+      "simBirth": 1999,
+      "simPrimary": 400,
+      "simLevel": 18.5
+    },
+    {
+      "name": "Daniel Wiffen",
+      "nation": "IE",
+      "sex": "M",
+      "simBirth": 2001,
+      "simPrimary": 400,
+      "simLevel": 18.5
+    },
+    {
+      "name": "Ahmed Hafnaoui",
+      "nation": "TN",
+      "sex": "M",
+      "simBirth": 2002,
+      "simPrimary": 400,
+      "simLevel": 18.2
+    },
+    {
+      "name": "Sam Short",
+      "nation": "AU",
+      "sex": "M",
+      "simBirth": 2003,
+      "simPrimary": 400,
+      "simLevel": 18.4
+    },
+    {
+      "name": "Elijah Winnington",
+      "nation": "AU",
+      "sex": "M",
+      "simBirth": 2000,
+      "simPrimary": 400,
+      "simLevel": 18.1
+    },
+    {
+      "name": "Lukas Märtens",
+      "nation": "DE",
+      "sex": "M",
+      "simBirth": 2001,
+      "simPrimary": 400,
+      "simLevel": 18.9
+    },
+    {
+      "name": "Matt Richards",
+      "nation": "GB",
+      "sex": "M",
+      "simBirth": 2002,
+      "simPrimary": 200,
+      "simLevel": 18.2
+    },
+    {
+      "name": "Duncan Scott",
+      "nation": "GB",
+      "sex": "M",
+      "simBirth": 1997,
+      "simPrimary": 200,
+      "simLevel": 18.3
+    },
+    {
+      "name": "Ryan Murphy",
+      "nation": "US",
+      "sex": "M",
+      "simBirth": 1995,
+      "simPrimary": 100,
+      "simLevel": 18.2
+    },
+    {
+      "name": "Yohann Ndoye-Brouard",
+      "nation": "FR",
+      "sex": "M",
+      "simBirth": 2000,
+      "simPrimary": 200,
+      "simLevel": 18.1
+    },
+    {
+      "name": "Summer McIntosh",
+      "nation": "CA",
+      "sex": "F",
+      "simBirth": 2006,
+      "simPrimary": 400,
+      "simLevel": 19.5
+    },
+    {
+      "name": "Katie Ledecky",
+      "nation": "US",
+      "sex": "F",
+      "simBirth": 1997,
+      "simPrimary": 400,
+      "simLevel": 18.9
+    },
+    {
+      "name": "Mollie O’Callaghan",
+      "nation": "AU",
+      "sex": "F",
+      "simBirth": 2004,
+      "simPrimary": 200,
+      "simLevel": 19.1
+    },
+    {
+      "name": "Ariarne Titmus",
+      "nation": "AU",
+      "sex": "F",
+      "simBirth": 2000,
+      "simPrimary": 400,
+      "simLevel": 19.2
+    },
+    {
+      "name": "Torri Huske",
+      "nation": "US",
+      "sex": "F",
+      "simBirth": 2002,
+      "simPrimary": 100,
+      "simLevel": 18.9
+    },
+    {
+      "name": "Sarah Sjöström",
+      "nation": "SE",
+      "sex": "F",
+      "simBirth": 1993,
+      "simPrimary": 60,
+      "simLevel": 18.8
+    },
+    {
+      "name": "Gretchen Walsh",
+      "nation": "US",
+      "sex": "F",
+      "simBirth": 2003,
+      "simPrimary": 100,
+      "simLevel": 19.2
+    },
+    {
+      "name": "Kate Douglass",
+      "nation": "US",
+      "sex": "F",
+      "simBirth": 2001,
+      "simPrimary": 100,
+      "simLevel": 18.9
+    },
+    {
+      "name": "Regan Smith",
+      "nation": "US",
+      "sex": "F",
+      "simBirth": 2002,
+      "simPrimary": 200,
+      "simLevel": 19.1
+    },
+    {
+      "name": "Kaylee McKeown",
+      "nation": "AU",
+      "sex": "F",
+      "simBirth": 2001,
+      "simPrimary": 200,
+      "simLevel": 19.2
+    },
+    {
+      "name": "Siobhán Haughey",
+      "nation": "HK",
+      "sex": "F",
+      "simBirth": 1997,
+      "simPrimary": 200,
+      "simLevel": 18.8
+    },
+    {
+      "name": "Lilly King",
+      "nation": "US",
+      "sex": "F",
+      "simBirth": 1997,
+      "simPrimary": 100,
+      "simLevel": 18.3
+    },
+    {
+      "name": "Benedetta Pilato",
+      "nation": "IT",
+      "sex": "F",
+      "simBirth": 2005,
+      "simPrimary": 100,
+      "simLevel": 18.3
+    },
+    {
+      "name": "Ruta Meilutyte",
+      "nation": "LT",
+      "sex": "F",
+      "simBirth": 1997,
+      "simPrimary": 100,
+      "simLevel": 18.5
+    },
+    {
+      "name": "Tang Qianting",
+      "nation": "CN",
+      "sex": "F",
+      "simBirth": 2004,
+      "simPrimary": 100,
+      "simLevel": 18.7
+    },
+    {
+      "name": "Yu Yiting",
+      "nation": "CN",
+      "sex": "F",
+      "simBirth": 2005,
+      "simPrimary": 200,
+      "simLevel": 18.5
+    },
+    {
+      "name": "Li Bingjie",
+      "nation": "CN",
+      "sex": "F",
+      "simBirth": 2002,
+      "simPrimary": 400,
+      "simLevel": 18.5
+    },
+    {
+      "name": "Isabel Gose",
+      "nation": "DE",
+      "sex": "F",
+      "simBirth": 2002,
+      "simPrimary": 400,
+      "simLevel": 18.5
+    },
+    {
+      "name": "Erika Fairweather",
+      "nation": "NZ",
+      "sex": "F",
+      "simBirth": 2003,
+      "simPrimary": 400,
+      "simLevel": 18.3
+    },
+    {
+      "name": "Freya Colbert",
+      "nation": "GB",
+      "sex": "F",
+      "simBirth": 2004,
+      "simPrimary": 400,
+      "simLevel": 18.1
+    },
+    {
+      "name": "Lani Pallister",
+      "nation": "AU",
+      "sex": "F",
+      "simBirth": 2002,
+      "simPrimary": 400,
+      "simLevel": 18.5
+    },
+    {
+      "name": "Kasia Wasick",
+      "nation": "PL",
+      "sex": "F",
+      "simBirth": 1992,
+      "simPrimary": 60,
+      "simLevel": 18.2
+    },
+    {
+      "name": "Shayna Jack",
+      "nation": "AU",
+      "sex": "F",
+      "simBirth": 1998,
+      "simPrimary": 100,
+      "simLevel": 18.2
+    },
+    {
+      "name": "Emma McKeon",
+      "nation": "AU",
+      "sex": "F",
+      "simBirth": 1994,
+      "simPrimary": 100,
+      "simLevel": 18.3
+    },
+    {
+      "name": "Penny Oleksiak",
+      "nation": "CA",
+      "sex": "F",
+      "simBirth": 2000,
+      "simPrimary": 100,
+      "simLevel": 18.1
+    },
+    {
+      "name": "Zhang Yuting",
+      "nation": "CN",
+      "sex": "F",
+      "simBirth": 2002,
+      "simPrimary": 200,
+      "simLevel": 18.0
+    },
+    {
+      "name": "Mona McSharry",
+      "nation": "IE",
+      "sex": "F",
+      "simBirth": 2000,
+      "simPrimary": 100,
+      "simLevel": 18.1
+    },
+    {
+      "name": "Tes Schouten",
+      "nation": "NL",
+      "sex": "F",
+      "simBirth": 2000,
+      "simPrimary": 200,
+      "simLevel": 18.3
+    },
+    {
+      "name": "Evgeniia Chikunova",
+      "nation": "RU",
+      "sex": "F",
+      "simBirth": 2004,
+      "simPrimary": 200,
+      "simLevel": 18.8
+    },
+    {
+      "name": "Abbie Wood",
+      "nation": "GB",
+      "sex": "F",
+      "simBirth": 1999,
+      "simPrimary": 200,
+      "simLevel": 18.1
+    },
+    {
+      "name": "Mary-Sophie Harvey",
+      "nation": "CA",
+      "sex": "F",
+      "simBirth": 1999,
+      "simPrimary": 200,
+      "simLevel": 18.0
+    },
+    {
+      "name": "Beata Nelson",
+      "nation": "US",
+      "sex": "F",
+      "simBirth": 1998,
+      "simPrimary": 200,
+      "simLevel": 18.0
+    },
+    {
+      "name": "Olivia Wunsch",
+      "nation": "AU",
+      "sex": "F",
+      "simBirth": 2006,
+      "simPrimary": 100,
+      "simLevel": 18.2
+    }
+  ]
+}
