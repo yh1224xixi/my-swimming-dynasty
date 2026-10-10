@@ -47,15 +47,33 @@
       if (!d || !d.player || !d.clubId || State.isNew) throw Error('请先进入生涯。');
       if (d.retired) throw Error('球员已经退役，无法模拟。');
       if (d.offseason || d._seasonSettled) throw Error('当前已在休赛期，请先开始新赛季。');
+      if (d._seasonSimPendingCard || d._seasonSimPendingEvent) throw Error('请先完成待处理事件，再继续模拟。');
       if ((window.MatchUI && MatchUI.isRunning()) || (window.GameLoop && GameLoop.phase !== GameLoop.PHASES.WAITING)) throw Error('请先完成当前比赛或战报，再模拟赛季。');
       const initial = State._packSaveJson(), season = d.season, startDay = d.dayIndex;
+      const baseline = {exp:d.expTotal||0,money:d.money||0,bonus:d.stats.bonusEarned||0,
+        wage:d.stats.wageEarned||0,ovr:PlayerSystem.overall(d.player),injuryDays:d.injuryDays||0};
       localStorage.setItem('football_local_mod_backup', initial);
       running = true; cancelRequested = false;
-      let matches = 0, events = 0, steps = 0, checkpoint = initial, complete = false;
-      const report = () => ({season, days:Math.max(0,State.data.dayIndex-startDay), matches, events, remaining:SeasonSystem.pendingFixtures(State).length, date:{...State.data.date}, cancelled:cancelRequested, complete});
+      let matches = 0, events = 0, steps = 0, checkpoint = initial, complete = false, pauseReason='',injuries=0;
+      const report = () => ({season, days:Math.max(0,State.data.dayIndex-startDay), matches, events, remaining:SeasonSystem.pendingFixtures(State).length, date:{...State.data.date}, cancelled:cancelRequested, complete,pauseReason,
+        summary:{exp:(State.data.expTotal||0)-baseline.exp,money:(State.data.money||0)-baseline.money,
+          bonus:(State.data.stats.bonusEarned||0)-baseline.bonus,wage:(State.data.stats.wageEarned||0)-baseline.wage,
+          ovrBefore:baseline.ovr,ovrAfter:PlayerSystem.overall(State.data.player),injuries,injuryDays:State.data.injuryDays||0}});
+      const handleEvent = event => {
+        if (!event) return false;
+        if (options.pauseOnChoices && event.choices?.length) {
+          State.data._seasonSimPendingEvent=event;pauseReason=event.title||'生活抉择';return true;
+        }
+        resolveEvent(event);events++;return false;
+      };
+      const handleCard = (card,ctx) => {
+        if(!card)return false;
+        if(options.pauseOnChoices&&card.options?.length){State.data._seasonSimPendingCard={card,ctx:ctx||{}};pauseReason=card.title||'生涯抉择';return true;}
+        EventCards.autoResolve(State,card);events++;return false;
+      };
       try {
-        if (d._stashedEvent) { const event=d._stashedEvent; delete d._stashedEvent; resolveEvent(event); events++; }
-        while (!cancelRequested) {
+        if (d._stashedEvent) { const event=d._stashedEvent; delete d._stashedEvent; handleEvent(event); }
+        while (!cancelRequested && !pauseReason) {
           const current = State.data;
           if (current.retired || Career.forcedRetirement(State)) break;
           if (current.season !== season || current.offseason) throw Error('赛季状态发生变化，模拟已停止。');
@@ -67,26 +85,28 @@
             const result = simulateFixture(fixture);
             if (!result || result.retryPending) throw Error('本场比赛未完成结算。');
             matches++;
+            if(result.injured)injuries++;
+            if(current._stashedEvent){const event=current._stashedEvent;delete current._stashedEvent;handleEvent(event);}
             if (result.ecCtx && window.EventCards) {
               if (window.StarFavor) StarFavor.applyGlow(State, result.ecCtx);
               if (window.ClubEvents) ClubEvents.noteSilent(State, [result.ecCtx]);
-              const card = EventCards.silentPick(State, [result.ecCtx]);
-              if (card) { EventCards.autoResolve(State, card); events++; }
+              if(!pauseReason)handleCard(EventCards.silentPick(State, [result.ecCtx]),result.ecCtx);
             }
           } else {
-            if (current.injuryDays <= 0) Training.dailyTrain(State);
+            if (current.injuryDays <= 0) {const train=Training.dailyTrain(State);if(train.injured)injuries++;}
             const event = Career.advanceDay(State);
-            if (event) { resolveEvent(event); events++; }
+            handleEvent(event);
             Career.processMissedFixtures(State);
-            if (!current.retired && !current.offseason && window.EventCards) {
+            if (!pauseReason && !current.retired && !current.offseason && window.EventCards) {
               const card = EventCards.rollDaily(State);
-              if (card) { EventCards.autoResolve(State, card); events++; }
+              handleCard(card);
             }
           }
           if (steps % 7 === 0 || fixture) saveProgress();
           if (options.onProgress) options.onProgress(report());
           await yieldFrame();
         }
+        State.data._lastSeasonSimulation=report();
         saveProgress();
         return report();
       } catch (error) {
