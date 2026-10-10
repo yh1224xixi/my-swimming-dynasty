@@ -1,7 +1,7 @@
 (function(){'use strict';
 const launch=document.createElement('button');launch.id='lm-launch';launch.textContent='本地修改';document.body.appendChild(launch);
 const panel=document.createElement('div');panel.id='lm-panel';panel.hidden=true;
-panel.innerHTML='<section id="lm-card" role="dialog" aria-modal="true" aria-label="本地修改面板"><button id="lm-close">关闭</button><h2>本地修改面板</h2><p>创建人物并进入生涯后使用。修改前自动备份；能力和潜力上限 99。</p><label>资金<input id="lm-money" type="number" min="0" max="1000000000"></label><label>技能点<input id="lm-sp" type="number" min="0" max="99999"></label><label>所有能力设为<input id="lm-ability" type="number" min="1" max="99" placeholder="留空则不改"></label><label>所有潜力设为<input id="lm-potential" type="number" min="1" max="99" placeholder="留空则不改"></label><label><span>恢复伤病和士气</span><input id="lm-heal" type="checkbox"></label><button id="lm-apply">应用并保存</button><div class="lm-grid"><button id="lm-export">导出存档</button><button id="lm-import">导入存档</button><button id="lm-undo">撤回上次修改</button><button id="lm-refresh">读取当前数值</button></div><input id="lm-file" type="file" accept="application/json,.json" hidden><div id="lm-status" role="status"></div><p>本地存档保存在当前浏览器。线上排行榜、虎扑云存档和广告奖励不在离线版本中提供。</p></section>';
+panel.innerHTML='<section id="lm-card" role="dialog" aria-modal="true" aria-label="本地修改面板"><button id="lm-close">关闭</button><h2>本地修改面板</h2><p>创建人物并进入生涯后使用。修改前自动备份；能力和潜力上限 99。</p><label>资金<input id="lm-money" type="number" min="0" max="1000000000"></label><label>技能点<input id="lm-sp" type="number" min="0" max="99999"></label><label>所有能力设为<input id="lm-ability" type="number" min="1" max="99" placeholder="留空则不改"></label><label>所有潜力设为<input id="lm-potential" type="number" min="1" max="99" placeholder="留空则不改"></label><label><span>恢复伤病和士气</span><input id="lm-heal" type="checkbox"></label><button id="lm-apply">应用并保存</button><div class="lm-grid"><button id="lm-export">导出存档</button><button id="lm-import">导入存档</button><button id="lm-undo">撤回上次修改</button><button id="lm-refresh">读取当前数值</button></div><input id="lm-file" type="file" accept="application/json,.json" hidden><div id="lm-status" role="status"></div><p>本地存档保存在当前浏览器。广告奖励可直接领取且不限次数；线上排行榜与虎扑云存档不提供。</p></section>';
 document.body.appendChild(panel);const el=id=>document.getElementById('lm-'+id),msg=s=>el('status').textContent=s;
 function state(){if(!window.State||!State.data||!State.data.player||!State.data.clubId||State.isNew)throw Error('请先创建人物并进入生涯，再使用修改功能。');return State.data}
 function backup(){const raw=State._packSaveJson();localStorage.setItem('football_local_mod_backup',raw);return raw}
@@ -16,4 +16,33 @@ function validate(d){if(!d||Array.isArray(d)||d.meta?.dataset!=='real-v1'||!d.pl
 function restore(raw){let d=validate(JSON.parse(raw));const old=State.data;try{State.data=d;State._unpackLoaded(d);State.isNew=false;persist()}catch(e){State.data=old;throw e}location.reload()}
 el('import').onclick=()=>el('file').click();el('file').onchange=async()=>{const f=el('file').files[0];if(!f)return;try{if(f.size>25*1024*1024)throw Error('存档文件过大。');const raw=await f.text();validate(JSON.parse(raw));if(!confirm('导入将替换当前生涯，当前进度会先备份。继续？'))return;if(State.data?.player&&!State.isNew)backup();restore(raw)}catch(e){msg(e.message)}finally{el('file').value=''}};
 el('undo').onclick=()=>{try{const raw=localStorage.getItem('football_local_mod_backup');if(!raw)throw Error('还没有修改备份。');validate(JSON.parse(raw));if(confirm('恢复修改前的存档？'))restore(raw)}catch(e){msg(e.message)}};
+})();
+
+// Keep legacy reward counters readable in the standalone unlimited edition.
+(function () {
+  if (window.Hub) Hub.adsTodayRows = function () {
+    return '<div class="row"><span>网页版奖励</span><b>直接领取 · 不限次数</b></div>';
+  };
+  function wording(node) {
+    var walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT), text;
+    while ((text = walker.nextNode())) {
+      var original = text.nodeValue;
+      var value = original
+        .replace(/本季剩(?:余)?\s*Infinity(?:\s*\/\s*\d+)?(?:\s*次)?/g, '不限次数')
+        .replace(/每季\s*\d+\s*次/g, '不限次数')
+        .replace(/Infinity\s*\/\s*\d+/g, '不限次数')
+        .replace(/Infinity/g, '不限');
+      if (value !== original) text.nodeValue = value;
+    }
+  }
+  var root = document.getElementById('app');
+  if (root) {
+    wording(root);
+    new MutationObserver(function (mutations) {
+      mutations.forEach(function (m) {
+        if (m.type === 'characterData') wording(m.target.parentNode);
+        else m.addedNodes.forEach(function (n) { if (n.nodeType === 1) wording(n); else if (n.nodeType === 3) wording(n.parentNode); });
+      });
+    }).observe(root, {childList:true, subtree:true, characterData:true});
+  }
 })();
