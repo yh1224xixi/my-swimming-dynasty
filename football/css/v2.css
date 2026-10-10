@@ -1,0 +1,721 @@
+/* ============================================================================
+   v2.css — V2 壳全新样式（绿+白+水墨 · 阳光白卡黑字细描边）
+   与旧壳 style.css 完全独立；类名自洽。
+   ============================================================================ */
+:root{
+  --bg:#f4f6f0; --card:#ffffff; --card-alt:#f0f4ec; --mint:#e8f6ea;
+  --text:#1a241c; --gray:#4a5a4c; --dim:#7a8a7c;
+  --accent:#63c97a; --accent-dark:#2e8a45;
+  --grad:linear-gradient(135deg,#9fe8ab 0%,#63c97a 100%);
+  --gold:#c9962e; --danger:#d64545;
+  --line:#d5ddd0; --divider:#e4e9e0; --ink:#22301f;
+  --shadow:0 4px 16px rgba(34,48,31,.12);
+  --radius:12px;
+  --art-filter:none;
+  --font:"PingFang SC","Microsoft YaHei","Noto Sans SC",system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:var(--font);font-size:14px;background:var(--bg);color:var(--text);overflow:hidden;
+  -webkit-font-smoothing:antialiased;user-select:none;touch-action:manipulation}
+button{font-family:inherit;color:inherit;background:none;border:none;cursor:pointer}
+.hidden{display:none!important}
+#app{height:100%;max-width:520px;margin:0 auto;position:relative;background:var(--bg);
+  box-shadow:0 0 40px rgba(34,48,31,.18)}
+
+/* ── 屏幕 ── */
+.screen{position:absolute;inset:0;display:flex;flex-direction:column;background:var(--bg);overflow:hidden}
+.screen.hidden{display:none!important}
+.pad{padding:18px 16px;overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch}
+.center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px}
+.screen-title{font-size:20px;font-weight:900;letter-spacing:2px;margin-bottom:14px;color:var(--accent-dark)}
+
+/* ── 面板 ── ★ P129 商业级边框语言（仿篮球版简况卡）：墨黑 2px 粗描边 + 实体硬阴影 + 大圆角 */
+.panel{background:var(--card);border:2px solid rgba(26,36,28,.78);border-radius:14px;padding:14px;margin-bottom:12px;
+  box-shadow:3px 3px 0 rgba(26,36,28,.3)}
+.panel.alt{background:var(--card-alt)}
+.panel.hl{border-color:var(--gold);background:#fdf9ee}
+.panel-title{font-size:13px;font-weight:800;color:var(--accent-dark);letter-spacing:1px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.panel-title::before{content:"";width:3px;height:12px;border-radius:2px;background:var(--grad)}
+.row{display:flex;align-items:center;gap:8px}
+.divider{height:1px;background:var(--divider);margin:8px 0}
+.dim12{font-size:12px;color:var(--dim);line-height:1.7}
+.mt-6{margin-top:6px}.mt-8{margin-top:8px}.mt-12{margin-top:12px}
+.stat-row{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:12px;color:var(--gray);margin-top:10px}
+.stat-row .bad,.bad{color:var(--danger)}.mid{color:var(--gold)}.ok{color:var(--accent-dark)}
+
+/* ── 按钮 ── ★ P129：墨黑 2px 描边 + 统一实体硬阴影，按压 = 位移 + 阴影收缩 */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;height:46px;padding:0 16px;
+  border-radius:12px;font-size:15px;font-weight:800;letter-spacing:1px;position:relative;overflow:hidden;
+  transition:transform .12s,box-shadow .12s;border:2px solid rgba(26,36,28,.78);background:var(--card);color:var(--text);
+  box-shadow:2.5px 2.5px 0 rgba(26,36,28,.35)}
+.btn:active{transform:translate(2px,2px);box-shadow:0.5px 0.5px 0 rgba(26,36,28,.35)}
+.btn-primary{background:var(--grad);color:#0f2415;border-color:rgba(21,54,30,.85);box-shadow:3px 3px 0 rgba(21,54,30,.45)}
+/* P133：危险确认按钮（UIkit.confirm danger 档——清空存档等不可逆操作） */
+.btn-danger{background:linear-gradient(135deg,#c2503a,#8e3322);color:#fff;border-color:rgba(90,25,14,.85);box-shadow:3px 3px 0 rgba(90,25,14,.45)}
+.btn-primary:active{box-shadow:0.5px 0.5px 0 rgba(21,54,30,.45)}
+.btn-ghost{background:var(--card);border-color:rgba(26,36,28,.78)}
+.btn-gold{background:linear-gradient(135deg,#f0cf7e,#ddb14e);color:#3a2600;border-color:rgba(139,98,26,.75);box-shadow:3px 3px 0 rgba(139,98,26,.4)}
+.btn-gold:active{box-shadow:0.5px 0.5px 0 rgba(139,98,26,.4)}
+.btn.btn-block{width:100%}
+.btn[disabled]{opacity:.4;pointer-events:none}
+.chip{display:inline-flex;align-items:center;height:32px;padding:0 14px;border-radius:999px;border:1.5px solid rgba(26,36,28,.55);
+  font-size:13px;background:var(--card);color:var(--gray);margin:0 6px 6px 0}
+.chip.sel{background:var(--grad);color:#0f2415;font-weight:700;border-color:rgba(21,54,30,.85);box-shadow:2px 2px 0 rgba(26,36,28,.35)}
+.chiprow{display:flex;flex-wrap:wrap;flex:1}
+
+/* ── 卡片选择 ── */
+.cardgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pick-card{padding:10px;border-radius:12px;border:2px solid rgba(26,36,28,.6);background:var(--card);cursor:pointer;font-size:13px}
+.pick-card b{display:flex;align-items:center;justify-content:space-between;gap:4px}
+.pick-card .tier-chip{font-size:10.5px;border:1px solid var(--line);border-radius:99px;padding:1px 7px;flex-shrink:0}
+.pick-card.sel{border-color:var(--accent);background:var(--mint);box-shadow:3px 3px 0 rgba(34,48,31,.16)}
+.pick-card.locked{opacity:.75}
+.num-input{width:72px;padding:8px;text-align:center;font-size:16px;font-weight:800;color:var(--text);
+  background:var(--card);border:1px solid var(--line);border-radius:8px;outline:none}
+
+/* ── 加载 / 菜单 ── */
+.boot-ball{width:64px;height:64px;border-radius:50%;background:radial-gradient(circle at 32% 30%,#fff 0 18%,var(--accent) 19% 55%,#1f5a33 56% 100%);
+  box-shadow:0 8px 20px rgba(34,48,31,.3);animation:floatY 4s ease-in-out infinite}
+.boot-ball.small{width:56px;height:56px}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.boot-title{font-size:30px;font-weight:900;letter-spacing:3px;margin:16px 0 4px;color:var(--text)}
+.boot-title i{display:block;font-style:italic;font-size:18px;letter-spacing:8px;color:var(--accent-dark);margin-top:4px}
+.boot-sub{font-size:10px;letter-spacing:4px;color:var(--dim)}
+.boot-bar{width:220px;height:4px;border-radius:4px;background:var(--divider);margin:22px auto 10px;overflow:hidden}
+.boot-fill{height:100%;width:0;border-radius:4px;background:var(--grad);transition:width .3s ease}
+.boot-tip{font-size:12px;color:var(--dim)}
+.boot-err{font-size:12px;color:var(--danger);margin-top:8px;max-width:320px}
+.menu-bg{position:absolute;inset:0;
+  background:url('../assets/comic/ec_stadium.webp') center 42%/cover no-repeat,#e9efe4}
+.menu-bg::after{content:"";position:absolute;inset:0;opacity:.35;
+  background-image:radial-gradient(rgba(34,48,31,.08) 1px,transparent 1px);background-size:5px 5px}
+.menu-hero{position:relative;z-index:1;flex-shrink:0;padding:max(24px,5vh) 24px 8px;text-align:center}
+.mh-title{text-align:center;margin-top:8px}
+.mh-accent{display:inline-block;font-size:min(50px,12.5vw);line-height:1.12;font-style:italic;font-weight:900;letter-spacing:4px;
+  color:#fff;background:linear-gradient(135deg,#4db563,#2e8a45 78%);padding:2px 16px 6px 20px;transform:rotate(-2deg);
+  box-shadow:5px 6px 0 rgba(20,36,24,.42),0 0 0 2.5px rgba(255,255,255,.85),0 0 0 4.5px rgba(20,36,24,.28);
+  text-shadow:2px 2px 0 rgba(15,40,22,.5)}
+.mh-line2{display:inline-block;font-size:min(21px,5.4vw);font-weight:900;font-style:italic;letter-spacing:9px;text-indent:9px;color:#2a1c04;
+  margin:14px 0 0 6px;background:linear-gradient(135deg,#f4d888,#ddb14e 82%);
+  padding:4px 10px 5px 19px;transform:rotate(1.4deg);clip-path:polygon(2.5% 0,100% 0,97.5% 100%,0 100%);
+  box-shadow:3px 4px 0 rgba(20,36,24,.4);text-shadow:0 1px 0 rgba(255,244,214,.7)}
+.menu-tagline{margin-top:13px;font-size:12px;color:#fff;letter-spacing:3px;font-weight:700;text-shadow:0 1px 3px rgba(20,40,25,.65),0 0 10px rgba(20,40,25,.45)}
+.menu-actions{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;justify-content:center;gap:11px;padding:0 22px}
+.menu-foot{position:relative;z-index:1;flex-shrink:0;text-align:center;padding:10px 0 max(14px,env(safe-area-inset-bottom));
+  font-size:11px;color:rgba(255,255,255,.92);letter-spacing:2px;font-weight:600;text-shadow:0 1px 3px rgba(20,40,25,.65),0 0 8px rgba(20,40,25,.45)}
+.menu-btn{display:flex;align-items:center;gap:13px;padding:12px 14px;border-radius:16px;text-align:left;width:100%;
+  border:2px solid rgba(26,36,28,.85);background:rgba(255,255,255,.96);
+  box-shadow:0 6px 18px rgba(20,36,24,.2),4px 4px 0 rgba(26,36,28,.85);
+  transition:transform .13s,box-shadow .13s;animation:menuIn .42s cubic-bezier(.22,1.2,.36,1) backwards}
+.menu-btn:active{transform:translate(3px,3px);box-shadow:0 2px 8px rgba(20,36,24,.18),1px 1px 0 rgba(26,36,28,.85)}
+@keyframes menuIn{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
+.menu-btn .mb-ico{width:44px;height:44px;border-radius:13px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  color:#fff;background:linear-gradient(150deg,#57bd6c,#2e8a45);border:2px solid rgba(26,36,28,.8);
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.35),2px 2px 0 rgba(26,36,28,.35)}
+.menu-btn .mb-ico svg{width:24px;height:24px;display:block}
+.menu-btn .mt{display:block;font-size:17px;font-weight:900;letter-spacing:1.5px;color:#1a241c}
+.menu-btn .md{display:block;font-size:12px;color:#5a6a5c;margin-top:2px}
+.menu-btn .mtw{flex:1;min-width:0}
+.menu-btn .mb-arrow{flex-shrink:0;font-size:20px;font-weight:900;color:rgba(26,36,28,.4);line-height:1;padding-right:2px}
+.menu-btn.primary{border-color:rgba(21,54,30,.9);background:linear-gradient(120deg,#eaf8ee,#d3f0db 60%,#c2e9cf);
+  box-shadow:0 6px 20px rgba(46,138,69,.35),4px 4px 0 rgba(21,54,30,.9)}
+.menu-btn.primary:active{box-shadow:0 2px 8px rgba(46,138,69,.3),1px 1px 0 rgba(21,54,30,.9)}
+.menu-btn.primary .mb-ico{color:#3a2600;background:linear-gradient(150deg,#f4d888,#ddb14e);border-color:rgba(21,54,30,.85);
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.5),2px 2px 0 rgba(21,54,30,.35)}
+.menu-btn.primary .mt{color:#14532a}
+.menu-btn.primary .md{color:#3e6a4a}
+@media (max-height:730px){
+  .menu-hero{padding:max(14px,3vh) 24px 6px}
+  .mh-accent{font-size:min(40px,10vw)}
+  .mh-line2{font-size:min(18px,4.8vw);margin-top:10px}
+  .menu-actions{gap:8px}
+  .menu-btn{padding:10px 13px}
+  .menu-btn .mb-ico{width:38px;height:38px;border-radius:11px}
+  .menu-btn .mb-ico svg{width:21px;height:21px}
+  .menu-btn .mt{font-size:15.5px}
+}
+
+/* ── HUD / Hub ── */
+.hud{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--card);
+  border-bottom:2px solid var(--ink);font-size:13px;font-weight:700;flex-shrink:0}
+.pill{display:inline-flex;align-items:center;padding:3px 9px;border-radius:99px;background:linear-gradient(135deg,#f0cf7e,#ddb14e);
+  color:#3a2600;font-size:11.5px;font-weight:800;border:1.5px solid rgba(139,98,26,.6)}
+.pill.ghost{background:var(--card);border:1px solid var(--line);color:var(--gray);cursor:pointer}
+
+/* ── 顶栏（1:1 对齐篮球生涯：OVR 徽章 + 姓名/档案 + 右上角四宫格按钮） ── */
+.gs-player{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+.gs-pinfo{min-width:0}
+.gs-pname{font-size:15px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gs-pmeta{font-size:11.5px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* ★ P159：窄屏截断时 hub.js 给本行加 hud-meta-tight 降字号保整行可读 */
+.gs-pmeta.hud-meta-tight{font-size:10px;letter-spacing:-.2px}
+.ovr-badge{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:46px;height:46px;
+  border-radius:11px;border:2px solid var(--ink);background:var(--card);box-shadow:2.5px 2.5px 0 rgba(34,48,31,.8);flex-shrink:0}
+.ovr-badge .n{font-size:20px;font-weight:900;font-style:italic;line-height:1;color:var(--accent-dark)}
+.ovr-badge .t{font-size:9px;font-weight:800;letter-spacing:1px;color:var(--ink)}
+.gs-icons{display:flex;gap:7px;flex-shrink:0}
+.icon-btn{width:36px;height:36px;border-radius:10px;border:2px solid var(--ink);background:var(--card);color:var(--ink);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:2.5px 2.5px 0 rgba(34,48,31,.8);
+  flex-shrink:0;transition:transform .12s,box-shadow .12s}
+.icon-btn:active{transform:translate(2px,2px);box-shadow:none}
+.news-btn{position:relative}
+.news-badge{position:absolute;top:-4px;right:-4px;min-width:16px;height:16px;padding:0 4px;border-radius:99px;background:var(--danger);
+  color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.news-badge.hidden{display:none}
+.gs-stageinfo{flex-shrink:0;text-align:center;font-size:12px;color:var(--gray);letter-spacing:1px;padding:7px 14px 0}
+.gs-stageinfo b{color:var(--accent-dark);font-style:italic}
+
+/* ── 虎扑热议帖子流（自 v1 对等迁移） ── */
+.news-item{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:10px;cursor:pointer;
+  transition:transform .12s,box-shadow .12s}
+.news-item:active{transform:translateY(1px)}
+.news-item .n-tag{font-size:11px;color:var(--accent-dark);font-weight:700;margin-right:6px}
+.news-item .n-title{font-size:13.5px;font-weight:700;color:var(--text);line-height:1.55}
+.news-item .n-meta{font-size:11px;color:var(--dim);margin-top:6px;display:flex;gap:12px}
+.news-item .n-new{display:inline-block;padding:1px 6px;border-radius:99px;background:var(--danger);color:#fff;font-size:10px;font-weight:800}
+.reply{display:flex;gap:8px;padding:8px 0;border-bottom:1px solid var(--divider)}
+.reply:last-child{border-bottom:none}
+.reply .r-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#2e8a45,#3f7fae);
+  color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.reply .r-user{font-size:11.5px;color:var(--dim);font-weight:700}
+.reply .r-text{font-size:13px;color:var(--text);line-height:1.6;margin-top:2px}
+.reply .r-likes{font-size:11px;color:var(--dim);margin-top:3px}
+.heat-flame{color:#ff7a3d;font-weight:800}
+.hub-main{flex:1;overflow-y:auto;padding:14px;-webkit-overflow-scrolling:touch}
+.hub-dock{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;background:var(--card);border-top:1px solid var(--line);flex-shrink:0;
+  padding:8px 10px calc(8px + env(safe-area-inset-bottom))}
+.dock-tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;height:50px;border-radius:10px;
+  background:transparent;border:1.5px solid transparent;color:var(--gray);transition:background .12s,border-color .12s}
+.dock-tab .dock-ico{display:flex;align-items:center;justify-content:center;opacity:.7}
+.dock-tab .dock-ico svg{width:18px;height:18px}
+.dock-tab .dock-lb{font-size:11px;font-weight:700}
+.dock-tab.on{background:var(--mint);border-color:var(--line);color:var(--accent-dark)}
+.dock-tab.on .dock-ico{opacity:1}
+.dock-tab:active{transform:translateY(1px)}
+.page-head{font-size:14px;font-weight:800;color:var(--ink);margin:2px 0 10px;padding-left:2px}
+.pos-avatar{display:inline-flex;width:56px;height:56px;border-radius:14px;background:var(--mint);border:1.5px solid var(--line);
+  align-items:center;justify-content:center;font-size:17px;font-weight:900;color:var(--accent-dark);flex-shrink:0}
+.pos-badge{display:inline-block;padding:1px 8px;border-radius:99px;background:var(--ink);color:#fff;font-size:10.5px;font-weight:800}
+.pos-badge.gold{background:linear-gradient(135deg,#f0cf7e,#ddb14e);color:#3a2600}
+.ovr-big{font-size:28px;font-weight:900;color:var(--accent-dark);font-family:var(--font)}
+.talent-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.talent-chip{font-size:10.5px;padding:2px 9px;border-radius:99px;border:1.5px solid rgba(26,36,28,.55);background:var(--card)}
+.list-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--divider)}
+.list-item:last-child{border-bottom:none}
+/* P112 审计补漏：hub.js 四处引用（排行榜/合同报价/积分榜/临时效果）的紧凑变体——
+   此前只有类名没有定义（浏览器静默忽略），列表行距走默认 9px 偏松 */
+.li-tight{padding:5px 0}
+.li-title{font-size:13.5px;font-weight:700}
+
+/* ── 比赛 ── */
+/* ★ P346（玩家反馈：灵动岛/挖孔屏遮挡实时比分）：viewport-fit=cover 下头部顶进状态栏，
+   第二行 padding-top 用安全区 inset 下移（env 不支持时第一行 padding 兜底）。 */
+.m-head{background:var(--card);border-bottom:1px solid var(--line);padding:12px 14px 8px;flex-shrink:0;text-align:center;padding-top:calc(12px + env(safe-area-inset-top, 0px))}
+.m-head .team{font-size:14px;font-weight:800}
+.m-head .score{font-size:26px;font-weight:900;margin:0 14px;color:var(--accent-dark)}
+.minute-row{display:flex;align-items:center;gap:8px;margin-top:6px}
+.minute-row span{font-size:12px;font-weight:800;color:var(--gray);min-width:32px;text-align:right}
+.min-bar{flex:1;height:4px;border-radius:4px;background:var(--divider);overflow:hidden}
+.min-bar div{height:100%;width:0;background:var(--grad);transition:width .3s}
+.m-feed{flex:1;overflow-y:auto;padding:12px 14px;-webkit-overflow-scrolling:touch}
+.feed-item{display:flex;gap:8px;padding:7px 0;border-bottom:1px dashed var(--divider);font-size:13px;line-height:1.7}
+.feed-item .min{flex-shrink:0;width:34px;text-align:right;font-weight:800;color:var(--dim);font-size:11.5px}
+.feed-item.goal{color:var(--accent-dark);font-weight:700}
+.feed-item.bad{color:var(--danger)}
+.feed-item.keymoment{color:var(--gold);font-weight:700}
+.feed-item.info{color:var(--gray)}
+.m-controls{flex-shrink:0;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:var(--card);border-top:1px solid var(--line);
+  display:flex;flex-direction:column;gap:8px}
+.key-choice{margin-bottom:2px}
+/* P52：结算插画同样改方块，与事件卡一致（原 150px 横条同样偏矮） */
+.settle-art{aspect-ratio:1/1;max-height:42vh;height:auto;border-radius:10px;background-size:cover;background-position:center;margin-bottom:10px;border:1px solid var(--line)}
+
+/* ── 签约揭示 ── */
+.reveal-bg{position:absolute;inset:0;background:
+  linear-gradient(180deg,rgba(244,246,240,.4) 0%,rgba(244,246,240,.75) 55%,rgba(244,246,240,.94) 100%),
+  url('../assets/redesign/bg_signing.webp') center 30%/cover no-repeat,var(--bg)}
+.reveal-content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:26px 22px calc(30px + env(safe-area-inset-bottom));text-align:center}
+.reveal-kicker{font-size:11px;letter-spacing:6px;color:#8a6a1c;font-weight:700}
+.reveal-club{font-size:36px;font-weight:900;letter-spacing:4px;margin:12px 0 6px;color:#8a6a1c}
+.reveal-league{font-size:13px;color:#4a5a4c;letter-spacing:2px}
+.reveal-card{margin:16px auto 0;background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:var(--radius);
+  padding:12px 16px;text-align:left;font-size:13px;max-width:400px;width:100%}
+.reveal-card .row{padding:6px 0;border-bottom:1px solid var(--divider)}
+.reveal-card .row:last-child{border-bottom:none}
+.reveal-btn{margin-top:16px;height:50px;font-size:16px}
+
+/* ── 弹窗 / Toast ──
+   ★ P274（玩家实录「结局收入陈列室点击没反应」）：全局浮层层级契约——
+   fixed 浮层（排行榜 1200 / 陈列室 1200-1400）此前全部压在弹窗(60)/toast(70)之上，
+   导致：① 浮层流程内弹的确认弹窗被 overlay 盖住（覆盖席位确认永远点不到，
+   点击坐标实际命中 overlay 下层的席位按钮——真机探针实锤 onSaved=8）；
+   ② 存入失败/成功的 toast 同样被盖住，玩家零反馈。
+   契约：普通浮层 1200-1400 < 弹窗 1500 < toast 1600（最上层，pointer-events:none）。 */
+#v2-modal-root{position:absolute;inset:0;z-index:1500;display:none;align-items:center;justify-content:center}
+#v2-modal-root.open{display:flex}
+.v2-modal-mask{position:absolute;inset:0;background:rgba(26,36,28,.45)}
+.v2-modal-card{position:relative;width:min(400px,92vw);max-height:82vh;overflow-y:auto;background:var(--card);
+  border:2px solid rgba(26,36,28,.85);border-radius:16px;padding:18px;box-shadow:5px 5px 0 rgba(26,36,28,.35),0 12px 40px rgba(34,48,31,.25);
+  animation:v2in .22s ease}
+/* ★ P271（TapTap 真机实锤）：结算卡/事件卡内容超高（>82vh）时，卡底主按钮
+   （返回俱乐部/继续/知道了）被 overflow 裁剪——青训首胜结算卡按钮只剩 26px 窄条、
+   真机矮视口下整颗不可见不可点，玩家卡死在赛后无法推进。
+   修法：卡内收尾主按钮 sticky 钉底——内容再高，按钮永远悬浮在可视区底部可达。
+   命中形态：settlement compact/full 两路 #mr-ok、事件卡 #ev-go/#ev-ok、
+   日常/生活事件选项后的继续按钮（均为 .ec-card 直接子且最后节点）。 */
+.v2-modal-card .ec-card > .btn:last-child,
+.v2-modal-card > .btn:last-child{position:sticky;bottom:2px;z-index:5}
+/* ★ P353-10（用户实测「小游戏卡内容太长，比赛继续按钮点不到」）：duel 卡的收尾按钮
+   包在 <div> 容器里（非 .ec-card 直接子级）→ 上面的 sticky 选择器没覆盖它，内容一长
+   按钮滚出 82vh 可视区。扩展：最后一个子级**无论 div 还是 btn** 一律钉底。 */
+.v2-modal-card .ec-card > div:last-child{position:sticky;bottom:2px;z-index:5}
+/* ★ P295（玩家反馈「买基金输入金额的框被输入法遮挡」）：输入法弹起时弹窗改顶对齐
+   + 收紧上限——JS 焦点处理给根加 .v2-kb（hub.js askAmount），键盘永远盖不到输入框上半屏。 */
+#v2-modal-root.v2-kb{align-items:flex-start;padding-top:6vh}
+#v2-modal-root.v2-kb .v2-modal-card{max-height:58vh}
+/* ★ P295：事件选项选中后——其他项置灰（示意已选择+防双击），已选项描金 */
+.ec-opt:disabled{opacity:.42;cursor:default}
+.ec-opt.ec-opt-dim{opacity:.42}
+.ec-opt.ec-opt-picked{border-color:var(--gold);color:var(--gold)}
+@keyframes v2in{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.v2-modal-card h3{text-align:center;font-size:17px;margin-bottom:10px}
+.v2-toast{position:relative;display:flex;align-items:center;gap:6px;margin:6px auto 0;width:fit-content;max-width:86%;
+  padding:9px 16px;border-radius:99px;background:var(--ink);color:#fff;font-size:13px;font-weight:600;
+  box-shadow:0 6px 18px rgba(0,0,0,.25);animation:v2in .2s ease;transition:opacity .3s,transform .3s}
+.v2-toast.gold{background:linear-gradient(135deg,#f0cf7e,#ddb14e);color:#3a2600}
+.v2-toast.green{background:var(--accent-dark)}
+.v2-toast.red,.v2-toast.err{background:var(--danger)}
+.v2-toast.out{opacity:0;transform:translateY(-8px)}
+#v2-toast-root{position:absolute;top:14px;left:0;right:0;z-index:1600;display:flex;flex-direction:column;align-items:center;pointer-events:none}
+
+/* ══════════════════════════════════════════════════════════════
+   V1 兼容层（2026-09-10 P41）
+   根因：V2 壳与旧壳样式文件完全独立（v2.css vs style.css），但两壳
+   共用同一批模块（eventcards / chapters / season_report / offseason_dev
+   / injuries / leaderboard_local）。这些模块渲染的 class 在 v2.css 里
+   未定义 → 在 V2 壳内裸渲染（事件卡、章回卡全裸）。
+   两套主题同源（M8 亮色：绿+白+水墨），故：① 补 V1 变量别名，
+   ② 原样迁入缺失样式块，保证双壳视觉一致。
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── ① V1 变量别名 ── */
+:root{
+  --bg-dark:var(--bg); --bg-card:var(--card); --bg-card-alt:var(--card-alt);
+  --bg-header:var(--card); --bg-elevated:var(--card); --bg-hover:rgba(63,174,90,.08);
+  --text-gray:var(--gray); --text-dim:var(--dim); --text-accent:var(--accent-dark);
+  --accent-light:rgba(99,201,122,.45); --accent-glow:rgba(99,201,122,.22);
+  --success:var(--accent-dark); --warning:#b87700; --mint:#e8f6ea;
+  --gold-grad:linear-gradient(135deg,#f0cf7e 0%,#ddb14e 45%,#b8862f 100%);
+  --accent-grad:linear-gradient(135deg,#9fe8ab 0%,#63c97a 100%);
+  --border:var(--line); --ink-line:var(--ink);
+  --hard-shadow:3px 3px 0 rgba(34,48,31,.28);
+  --shadow-lift:0 10px 30px rgba(34,48,31,.18);
+  --radius-sm:7px;
+  --fs-xs:11px; --fs-sm:12.5px; --fs-md:14px; --fs-lg:16px; --fs-xl:19px; --fs-xxl:24px;
+  --font-num:"DIN Alternate","Bahnschrift","Arial Narrow",var(--font);
+}
+
+/* ── ② 工具类 ── */
+.mt-10{margin-top:10px}
+.mb-8{margin-bottom:8px}
+.c-gold{color:var(--gold)}
+.muted-12{font-size:12px;color:var(--gray)}
+
+/* ── ③ 小按钮 ── */
+.btn-sm{height:32px;padding:0 14px;font-size:12.5px;border-radius:6px;width:auto;flex:none;gap:6px;line-height:1;border-width:1.5px;
+  box-shadow:2px 2px 0 rgba(34,48,31,.25)}
+.btn-sm:active{transform:translate(1px,1px);box-shadow:1px 1px 0 rgba(34,48,31,.3)}
+.btn.btn-block,.btn-sm.btn-block{width:100%;flex:none}
+
+/* ── ④ 球员卡（V2 亮色版：旧壳深色渐变按 M8 亮色化不复用） ── */
+.player-card{border-color:rgba(99,201,122,.45)}
+
+/* ── ⑤ 数值条 / 列表行 ── */
+.stat-bar{height:5px;border-radius:3px;background:rgba(99,201,122,.16);margin-top:5px;overflow:hidden}
+.stat-fill{height:100%;border-radius:3px;transition:width .5s ease}
+.list-item .li-main{flex:1;min-width:0}
+.list-item .li-sub{font-size:12px;color:var(--gray);margin-top:2px}
+
+/* ── ⑥ 事件卡（比赛间隙抉择卡 · 美漫画配图） ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+/* ★ P130 长卡体检（用户反馈：结局卡超长后底部「分享到虎扑」按钮被裁、无法滚达）：
+   原来卡片被 max-height:100% 钳在容器高、整卡无滚动——跨周目累积/荣誉/产业清算等
+   面板一多就溢出裁切。改为 max-height:none（自然撑高）+ 整卡 overflow-y:auto：
+   内容少 → 仍由 min-height:100% 撑满（card-spread 空隙分配不变）；
+   内容多 → 卡自然变长，由外层 #hub-main（overflow-y:auto）接管滚动，
+   底部分享/收尾按钮永远可达。 */
+.ec-card{display:flex;flex-direction:column;min-height:100%;max-height:none;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  /* ★ P151（用户反馈「底部无意义横向滑轮」）：卡是竖排流，横向永不滚 ——
+     overflow-y:auto 会把 overflow-x 计算成 auto，个别行超宽就拖出一条横向滚动条；
+     显式锁死横向 = 自动适配，不出无意义的滑轮（内容仍纵向自适应/缩放）。 */
+  overflow-x:hidden}
+/* P52：主页卡（内容通常只有 1 个按钮）把空隙均匀分散——
+   否则 flex:1 的正文会吃掉全部余量，表现为「正文下方空一大块」 */
+.ec-card.card-spread{justify-content:space-between}
+.ec-card.card-spread .ec-body{flex:none}
+/* P52：插画用方块（素材本就是 512x512）——原先 height:130px 把方块压成 3:1 横条，
+   整卡只填 48% 屏幕。改 aspect-ratio 后零裁切且撑满竖屏。 */
+.ec-art{flex:1 1 0;min-height:96px;border-radius:10px;margin-bottom:16px;background-size:cover;background-position:center;
+  border:2px solid var(--ink-line);box-shadow:4px 4px 0 rgba(0,0,0,.7);animation:fadeUp .35s both;position:relative;overflow:hidden}
+.ec-art::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(244,246,240,.5))}
+.ec-kicker{font-size:10px;letter-spacing:4px;color:var(--dim);font-weight:700;margin-bottom:6px}
+/* P52：学篮球的卡片头部——左「场景」实心标签 + 右「时机」描边标签 */
+.ec-cardhead{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+.ec-tag{display:inline-block;background:var(--accent-dark);color:#fff;font-size:10px;font-weight:900;letter-spacing:2px;
+  padding:3px 10px;border-radius:4px;flex-shrink:0}
+.ec-tag.ghost{background:transparent;border:1.5px solid var(--line);color:var(--dim);letter-spacing:1px}
+.ec-hint{text-align:center;font-size:11px;color:var(--dim);letter-spacing:1px;margin-top:14px}
+.ec-title{display:inline-block;background:var(--ink-line);color:#fff;font-size:21px;font-weight:800;font-style:italic;
+  letter-spacing:2px;padding:3px 14px 4px;transform:rotate(-1.2deg);margin-bottom:12px;box-shadow:3px 3px 0 rgba(63,174,90,.35)}
+.ec-body{flex:0 1 auto;min-height:0;overflow-y:auto;font-size:14px;line-height:2;color:var(--gray);margin-bottom:16px}
+.ec-body b{color:var(--text)}
+.ec-opts{display:flex;flex-direction:column;gap:10px}
+.ec-opt{display:block;text-align:left;padding:13px 15px;height:auto;white-space:normal;line-height:1.6;font-size:14px;font-weight:700}
+.ec-opt .ec-opt-sub{display:block;font-size:11.5px;font-weight:400;color:var(--dim);margin-top:3px}
+/* P52：2x2 网格选项（休赛期「菜单卡」用——4 个环节+结束要一屏放下，方块插画才留得住） */
+.ec-opts.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ec-opts.grid2 .ec-opt{padding:10px 12px;font-size:13px;line-height:1.45}
+.ec-opts.grid2 .ec-opt-sub{font-size:10.5px;margin-top:2px}
+.ec-response{border-left:3px solid var(--accent);padding:9px 0 9px 13px;margin:14px 0;font-size:13px;line-height:1.9;
+  color:var(--text);animation:fadeUp .3s both;background:rgba(63,174,90,.05)}
+.ec-fx{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.ec-fx .fx-chip{font-size:11px;font-weight:800;padding:2px 9px;border-radius:99px;border:1px solid rgba(126,224,140,.4);color:var(--accent-dark)}
+.ec-fx .fx-chip.neg{border-color:rgba(214,69,69,.45);color:var(--danger)}
+.ec-fx .fx-chip.gold{border-color:rgba(201,150,46,.5);color:var(--gold)}
+/* P52：矮屏不再压成横条，而是换更扁的比例（仍是完整构图，不裁头） */
+@media (max-height:700px){ .ec-art{min-height:84px} }
+@media (max-height:600px){
+  .ec-art{min-height:76px;margin-bottom:12px}
+  .ec-body{margin-bottom:10px;font-size:13px;line-height:1.8}
+}
+
+/* ── ⑦ 章回叙事卡（生涯节点全屏转场） ── */
+.ch-card{max-width:420px;width:92vw;overflow:hidden;border-radius:14px;background:var(--card);
+  border:1.5px solid var(--line);box-shadow:var(--shadow-lift)}
+.ch-art{aspect-ratio:1/1;max-height:44vh;height:auto;background-size:cover;background-position:center;border-bottom:1px solid var(--divider)}
+/* P52：内嵌模式下章回卡撑满竖屏（弹窗模式下不是 #hub-main 子元素，不受影响） */
+.hub-main .ch-card{min-height:100%;max-height:100%;display:flex;flex-direction:column;margin:0 auto}
+.hub-main .ch-art{flex:1 1 0;min-height:96px;aspect-ratio:auto;max-height:none}
+.hub-main .ch-body{flex:0 0 auto;display:flex;flex-direction:column;justify-content:center}
+.ch-body{padding:16px 18px 18px;text-align:center}
+.ch-kicker{font-size:10.5px;letter-spacing:5px;color:var(--accent-dark);font-weight:800}
+.ch-title{font-size:26px;font-weight:900;font-style:italic;letter-spacing:3px;color:#1a241c;margin:6px 0 4px}
+.ch-sub{font-size:12.5px;line-height:1.8;color:var(--gray)}
+
+/* ── V1 兼容层补充：属性页进度条与列表右值（P49 属性页移植；P266 允许掉行）──
+   ★ P266：行内按钮（.btn-sm flex:none）不可收缩，窄屏（~486px 虎扑容器）下
+   「突破+5 + 经验突破+5」并排会撑破行宽 → 让按钮掉到下一行，不再横向撑宽整页。 */
+.bar-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:7px;font-size:12px}
+.bar-row .b-label{width:64px;color:var(--text-gray);flex-shrink:0}
+.bar-row .b-track{flex:1;height:9px;border-radius:5px;background:rgba(126,224,140,.12);overflow:hidden;border:1px solid rgba(26,36,28,.3)}
+.bar-row .b-fill{height:100%;border-radius:4px;transition:width .6s ease}
+.bar-row .b-val{width:30px;text-align:right;font-weight:700}
+
+/* ── P129 注释按钮（长说明收纳）：行内小「?」，点开模态看全文 ── */
+.hint-btn{width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(26,36,28,.65);background:var(--card);
+  color:var(--gray);font-size:12px;font-weight:900;line-height:1;display:inline-flex;align-items:center;justify-content:center;
+  flex-shrink:0;cursor:pointer;margin-left:auto;padding:0;transition:transform .12s}
+.hint-btn:active{transform:scale(.9)}
+.hint-btn.on-inline{margin-left:2px}
+.list-item .li-right{text-align:right;font-size:13px;font-weight:700}
+.list-item.win .li-right{color:var(--accent-light)}
+
+/* P50 的底栏锁定已由 P51 取代：底栏改为「覆盖层弹出」，不再替换主页内容，
+   因此卡片未处理完也可以放心查看数据——收起后卡片原样保留、可继续推进。 */
+
+/* ── P51：底栏页面覆盖层（点击底栏弹出，主页卡片不被替换）──
+   设计意图：底栏是「查看入口」而不是「页面切换」。页面以覆盖层呈现，
+   关掉即回到原来的卡片，因此不会打断「事件卡推进时间」的主循环。 */
+.hub-sheet{position:absolute;left:0;right:0;top:0;bottom:0;z-index:40;display:none;flex-direction:column;
+  background:var(--bg);box-shadow:0 -8px 28px rgba(34,48,31,.18);animation:sheetIn .2s ease}
+.hub-sheet.open{display:flex}
+@keyframes sheetIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:11px 14px;
+  background:var(--card);border-bottom:1px solid var(--line);flex-shrink:0}
+.sheet-title{font-size:15px;font-weight:900;color:var(--accent-dark);letter-spacing:1px}
+/* ★ P266：overflow-y:auto 会把 overflow-x 计算成 auto——个别行超宽（如属性行并排两颗
+   不可收缩的 btn-sm）就撑出横向滚动，整页可被拖到「按钮超出边界」的错位状态。
+   显式锁死横向（P151 事件卡同款先例）：超宽行交由 .bar-row 的 flex-wrap 掉行消化。 */
+.sheet-body{flex:1;overflow-y:auto;overflow-x:hidden;padding:14px;-webkit-overflow-scrolling:touch}
+.sheet-foot{padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:var(--card);
+  border-top:1px solid var(--line);flex-shrink:0}
+
+/* P55: theme system -- UI accent vars from theme.js; art recolored via --art-filter */
+.ec-art,.ch-art,.settle-art{filter:var(--art-filter,none)}
+.theme-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.theme-cell{display:grid;grid-template-columns:24px 1fr;gap:2px 10px;align-items:center;text-align:left;
+  padding:10px 12px;height:auto;white-space:normal;border-radius:10px;background:var(--card);
+  border:1.5px solid var(--line);transition:border-color .12s,background .12s}
+.theme-cell.on{border-color:var(--accent);background:var(--mint)}
+.theme-cell.locked{opacity:.45}
+.theme-swatch{grid-row:span 2;width:24px;height:24px;border-radius:7px;border:1.5px solid rgba(34,48,31,.18)}
+.theme-name{display:block;font-size:13px;font-weight:800;color:var(--text)}
+.theme-desc{display:block;font-size:10.5px;color:var(--dim);margin-top:1px;line-height:1.4}
+
+/* P64 球星好感注脚（高光/观赛/保底搭车） */
+.ec-favnote{margin:2px 0 12px;padding:8px 12px;font-size:12px;line-height:1.7;color:var(--accent,#b98a2e);background:color-mix(in srgb, var(--accent,#b98a2e) 10%, transparent);border-left:3px solid var(--accent,#b98a2e);border-radius:6px}
+
+/* ============================================================================
+   P97-M3B · 三层对弈小游戏（L1 创造 / L2 破坏 / L3 终结守门）
+   规格统一（用户 D10）：同一套视觉基底 + 同一套提示条规范
+   ============================================================================ */
+.duel-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}
+.duel-title{font-size:15px;font-weight:800;color:var(--accent-dark)}
+.duel-min{font-size:11.5px;color:var(--dim);font-weight:700}
+.duel-sub{font-size:12px;color:var(--gray);line-height:1.6;margin-bottom:10px}
+.duel-profile{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:9px}
+.duel-chip{font-size:10.5px;padding:3px 8px;border-radius:20px;background:var(--card-alt);
+  border:1px solid var(--line);color:var(--gray);white-space:nowrap}
+.duel-chip b{color:var(--accent-dark)}
+/* P102：对弈中已生效技能的可见化 chips（仅 ≥1★ 且本层真实挂钩的技能） */
+.duel-skills{display:flex;flex-wrap:wrap;gap:5px;margin:-3px 0 9px}
+.duel-skills .duel-chip{background:transparent;color:var(--text);font-weight:600}
+.duel-hint{display:flex;gap:8px;align-items:flex-start;padding:9px 11px;border-radius:9px;
+  background:var(--mint);border-left:3px solid var(--accent);font-size:12.5px;
+  line-height:1.65;color:var(--text);margin-bottom:11px}
+.duel-hint.none{background:var(--card-alt);border-left-color:var(--dim);color:var(--gray)}
+.duel-hint .lv{flex-shrink:0;font-size:10px;font-weight:800;color:var(--accent-dark);
+  border:1px solid var(--accent);border-radius:5px;padding:1px 5px;margin-top:1px}
+.duel-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.duel-opt{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;
+  padding:10px 12px;min-height:62px;height:auto;white-space:normal;border-radius:10px;
+  background:var(--card);border:1.5px solid var(--line);cursor:pointer;
+  transition:border-color .12s,background .12s,transform .08s}
+.duel-opt:active{transform:translate(1px,1px)}
+.duel-opt.on{border-color:var(--accent);background:var(--mint)}
+.duel-opt .nm{font-size:13px;font-weight:800;color:var(--text)}
+.duel-opt .ds{font-size:10.5px;color:var(--dim);line-height:1.45}
+.duel-opt .tag{font-size:10px;font-weight:800;color:var(--gold)}
+/* L3：3 列 × 2 行球门 */
+.duel-goal{border:2.5px solid var(--ink);border-radius:8px 8px 4px 4px;padding:7px;
+  background:linear-gradient(180deg,rgba(99,201,122,.06),rgba(34,48,31,.05));margin-bottom:12px}
+.duel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.duel-cell{position:relative;min-height:52px;border-radius:7px;background:var(--card);
+  border:1.5px solid var(--line);cursor:pointer;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:1px;padding:6px 4px;
+  transition:border-color .12s,background .12s,transform .08s}
+.duel-cell:active{transform:translate(1px,1px)}
+.duel-cell.on{border-color:var(--accent);background:var(--mint)}
+.duel-cell .cn{font-size:12.5px;font-weight:800;color:var(--text)}
+.duel-cell .hintdot{position:absolute;top:4px;right:5px;width:6px;height:6px;border-radius:50%;
+  background:var(--gold);opacity:0}
+.duel-cell.hinted .hintdot{opacity:1}
+/* ★ P115：线索指向格 = 金点 + 金边，双重视觉（只靠圆点曾让玩家困惑） */
+.duel-cell.hinted{border-color:var(--gold)}
+.duel-res{padding:11px 13px;border-radius:10px;font-size:13px;line-height:1.7;margin-top:10px;
+  background:var(--card-alt);border-left:3px solid var(--line)}
+.duel-res.good{background:var(--mint);border-left-color:var(--accent)}
+.duel-res.bad{background:#fdf1f1;border-left-color:var(--danger)}
+.duel-res .big{display:block;font-size:14px;font-weight:800;margin-bottom:3px}
+.duel-note{font-size:10.5px;color:var(--dim);line-height:1.5;margin-top:9px}
+/* ★ P97-3C · 中场模式切换（传球组织 / 持球推进）：两个并排 pill，选中走主题色 */
+.duel-modes{display:flex;margin-bottom:9px;border:2px solid var(--ink);border-radius:8px;overflow:hidden}
+.duel-mode{flex:1;padding:7px 0;font:inherit;font-size:12px;font-weight:800;background:var(--card);
+  color:var(--dim);border:0;cursor:pointer;transition:background .12s,color .12s}
+.duel-mode.on{background:var(--accent);color:#fff}
+.duel-mode+.duel-mode{border-left:2px solid var(--ink)}
+/* ★ P151 · 广告直成入口：四层对弈卡通用的广告位（看完广告 → 下一格必定成功）。
+   视觉走「金框福利位」口径（同 hub 广告位家族），与普通选项卡明确区分。 */
+.duel-ad{margin-top:12px;border:1.5px dashed var(--gold);border-radius:9px;padding:9px 10px;
+  background:rgba(240,207,126,.08);text-align:center}
+.duel-ad-btn{display:block;width:100%;font:inherit;font-size:13px;font-weight:800;color:var(--text);
+  background:linear-gradient(180deg,#f7e3ae,#e9c877);border:1.5px solid #b8912e;border-radius:8px;
+  padding:9px 8px;cursor:pointer;letter-spacing:.5px;transition:filter .12s,transform .08s}
+.duel-ad-btn:active{transform:translate(1px,1px)}
+.duel-ad-btn.busy{filter:grayscale(.7);opacity:.6;pointer-events:none}
+.duel-ad-btn.ready{background:var(--accent);border-color:var(--accent-dark);color:#fff}
+.duel-ad-note{display:block;margin-top:5px;font-size:10.5px;color:var(--dim)}
+
+/* ★ P168 · 青训邀约「出场承诺」实底徽章（旧淡色文字在白卡上看不清，用户截图反馈） */
+.promise-badge{display:inline-block;font-size:11px;font-weight:800;color:#fff;border-radius:6px;
+  padding:2px 9px;letter-spacing:.5px;box-shadow:1.5px 1.5px 0 rgba(26,36,28,.35);vertical-align:middle}
+
+/* ============================================================================
+   P168 · 小游戏结算动效（美漫风 · 纯 CSS/SVG 零图片，file:// 安全）
+   射门（球飞向球门选定格）/ 扑救（门将飞身扑向选定格）/ 传球（弧线出球）/
+   防守（滑铲断球），结算瞬间播一次，配合拟声词硬标签。
+   ============================================================================ */
+.duel-anim{position:relative;height:92px;border:2px solid var(--ink);border-radius:10px;
+  margin-top:12px;overflow:hidden;box-shadow:2px 2px 0 rgba(26,36,28,.3);
+  background:repeating-linear-gradient(180deg,#5cc172 0 14px,#4fb263 14px 28px)}
+.duel-anim.good{background:repeating-linear-gradient(180deg,#63c97a 0 14px,#54ba6a 14px 28px)}
+.duel-anim.bad{background:repeating-linear-gradient(180deg,#5cb96f 0 14px,#4d9f5f 14px 28px)}
+/* 草地上的球门（白粗描边 + 网格），left/right 两种朝向 */
+.da-goal{position:absolute;top:8px;bottom:26px;width:33%;
+  border:3px solid #fff;border-top-width:4px;border-radius:2px 2px 8px 8px;
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,.3) 0 1px,transparent 1px 11px),
+    repeating-linear-gradient(0deg,rgba(255,255,255,.3) 0 1px,transparent 1px 10px)}
+.da-goal.l{left:5%} .da-goal.r{right:5%}
+/* 足球：白底黑描边 + 弧纹，起点 --bx 终点 --tx/--ty 由 JS 按选定格注入 */
+.da-ball{position:absolute;width:15px;height:15px;border-radius:50%;background:#fff;
+  border:2px solid var(--ink);z-index:4;left:var(--bx,6%);top:56%;
+  box-shadow:0 1px 0 rgba(26,36,28,.4)}
+.da-ball::after{content:"";position:absolute;inset:2px;border-radius:50%;
+  background:radial-gradient(circle at 50% 50%,var(--ink) 0 2px,transparent 2.5px)}
+.da-ball.fly{animation:daFly .8s cubic-bezier(.25,.7,.3,1) .12s forwards}
+.da-ball.flyHigh{animation:daFlyHigh .8s ease-in .12s forwards}
+@keyframes daFly{to{left:var(--tx);top:var(--ty);transform:scale(.82)}}
+@keyframes daFlyHigh{to{left:var(--tx);top:-16px;transform:scale(.7)}}
+/* 门将/防守剪影：圆头+躯干，扑救时向 --kx 位移并旋转（飞身） */
+.da-keeper{position:absolute;bottom:24px;left:50%;width:20px;height:36px;z-index:3;
+  transform:translateX(-50%)}
+.da-keeper::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:11px;height:11px;border-radius:50%;background:var(--ink)}
+.da-keeper::after{content:"";position:absolute;top:10px;left:50%;transform:translateX(-50%);
+  width:14px;height:24px;border-radius:7px 7px 4px 4px;background:var(--ink)}
+.da-keeper.mine::before,.da-keeper.mine::after{background:var(--accent-dark)}
+.da-keeper.dive{animation:daDive .6s cubic-bezier(.3,.85,.4,1) .18s forwards}
+@keyframes daDive{to{left:var(--kx);transform:translateX(-50%) rotate(var(--krot,0deg))}}
+/* 滑铲剪影（L2 防守）：铲出位移 + 倒地旋转 */
+.da-slidertwo{position:absolute;bottom:20px;left:38%;width:22px;height:34px;z-index:3}
+.da-slidertwo::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:11px;height:11px;border-radius:50%;background:var(--ink)}
+.da-slidertwo::after{content:"";position:absolute;top:10px;left:50%;transform:translateX(-50%);
+  width:15px;height:23px;border-radius:7px 7px 4px 4px;background:var(--ink)}
+.da-slidertwo.go{animation:daSlide .6s cubic-bezier(.3,.85,.4,1) .15s forwards}
+@keyframes daSlide{to{left:var(--sx);transform:rotate(-68deg)}}
+/* 速度线：射门/铲断瞬间的美漫氛围线 */
+.da-lines{position:absolute;inset:0;z-index:1;opacity:0;animation:daDash .5s .1s forwards}
+.da-lines i{position:absolute;height:2.5px;width:26%;border-radius:2px;
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,.95) 0 7px,transparent 7px 12px)}
+.da-lines i:nth-child(1){top:24%;left:8%;transform:rotate(-12deg)}
+.da-lines i:nth-child(2){top:46%;left:2%;transform:rotate(-6deg)}
+.da-lines i:nth-child(3){top:66%;left:12%;transform:rotate(-16deg)}
+@keyframes daDash{0%{opacity:0;transform:translateX(10px)}35%{opacity:1}100%{opacity:.55;transform:translateX(-6px)}}
+/* 拟声词硬标签：美漫斜切爆炸框 */
+.da-word{position:absolute;top:7px;right:8px;z-index:5;font-size:15px;font-weight:900;
+  letter-spacing:1px;color:#fff;background:var(--ink);border:2px solid #fff;
+  padding:2px 9px;border-radius:3px;transform:rotate(-4deg);
+  clip-path:polygon(4% 0,100% 0,96% 100%,0 100%);
+  animation:daPop .55s .45s cubic-bezier(.2,1.4,.4,1) backwards}
+.da-word.good{background:var(--accent-dark)}
+.da-word.bad{background:var(--danger)}
+@keyframes daPop{0%{transform:scale(0) rotate(-14deg);opacity:0}
+  70%{transform:scale(1.22) rotate(2deg);opacity:1}100%{transform:scale(1) rotate(-4deg);opacity:1}}
+/* 落点标记（传球）：圈圈放大 */
+.da-spot{position:absolute;width:12px;height:12px;border:2.5px solid #fff;border-radius:50%;
+  z-index:2;left:var(--tx);top:52%;transform:translate(-50%,-50%);opacity:0;
+  animation:daSpot .6s .5s forwards}
+@keyframes daSpot{0%{opacity:0;transform:translate(-50%,-50%) scale(.4)}
+  60%{opacity:1;transform:translate(-50%,-50%) scale(1.5)}100%{opacity:.9;transform:translate(-50%,-50%) scale(1)}}
+
+/* ============================================================================
+   P152 · 游戏内商业化精装修（对齐主菜单 menu-btn 设计语言 · 用户 2026-09-19）
+   图一（主菜单）的三板斧：墨黑粗描边 + 实体硬阴影 + 渐变图标容器/内高光。
+   原则：① 颜色全部走主题变量（--grad/--mint/--accent-dark），六套配色通吃；
+        ② 只追加覆写不改既有行，本段整体可回滚（删段即回 P150 视觉）；
+        ③ 主菜单(menu-*)零改动——它是基准本身。
+   ============================================================================ */
+
+/* ── A. 全局底纹 + 滚动条（menu-bg 网点语言下放游戏内） ── */
+.hub-main,.pad,.m-feed,.sheet-body{
+  background-image:radial-gradient(rgba(34,48,31,.05) 1px,transparent 1px);
+  background-size:5px 5px}
+.hub-main::-webkit-scrollbar,.pad::-webkit-scrollbar,.ec-card::-webkit-scrollbar,
+.m-feed::-webkit-scrollbar,.sheet-body::-webkit-scrollbar{width:5px;height:5px}
+.hub-main::-webkit-scrollbar-thumb,.pad::-webkit-scrollbar-thumb,.ec-card::-webkit-scrollbar-thumb,
+.m-feed::-webkit-scrollbar-thumb,.sheet-body::-webkit-scrollbar-thumb{
+  background:rgba(26,36,28,.32);border-radius:99px}
+.hub-main::-webkit-scrollbar-track,.pad::-webkit-scrollbar-track,.ec-card::-webkit-scrollbar-track,
+.m-feed::-webkit-scrollbar-track,.sheet-body::-webkit-scrollbar-track{background:transparent}
+
+/* ── B. 顶栏：渐变 OVR 徽章 + 渐变图标钮（menu-btn .mb-ico 同款语言） ── */
+.hud{background:linear-gradient(180deg,#ffffff 0%,#f5f8f0 100%)}
+/* ★ P160 伤病恒定徽章 + 顶栏快捷痊愈（中心提示行内联小件，绷带红 + 广告金） */
+.hud-stage{display:flex;justify-content:center;align-items:center;gap:5px}
+.hud-injury-badge{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:999px;
+  background:var(--danger);color:#fff;font-size:11px;font-weight:800;font-style:normal;line-height:1.4;
+  vertical-align:middle;box-shadow:0 1px 0 var(--ink)}
+.hud-injury-badge i{font-style:normal;font-variant-numeric:tabular-nums}
+.hud-injury-badge svg{width:11px;height:11px;flex-shrink:0}
+.hud-heal-btn{display:inline-flex;align-items:center;gap:3px;padding:2px 9px;border-radius:999px;
+  border:1.5px solid var(--gold);background:var(--grad);color:#fff;font:inherit;font-size:11px;
+  font-weight:800;line-height:1.4;cursor:pointer;vertical-align:middle;transition:filter .12s;
+  box-shadow:2px 2px 0 rgba(34,48,31,.8)}
+.hud-heal-btn:active{transform:translate(2px,2px);box-shadow:0.5px 0.5px 0 rgba(34,48,31,.8);filter:brightness(.95)}
+.hud-heal-btn svg{width:11px;height:11px;flex-shrink:0}
+.ovr-badge{background:var(--grad);
+  box-shadow:2.5px 2.5px 0 rgba(34,48,31,.8),inset 0 2px 0 rgba(255,255,255,.42)}
+.ovr-badge .n{color:#1a241c;text-shadow:0 1px 0 rgba(255,255,255,.4)}
+.ovr-badge .t{color:rgba(26,36,28,.72)}
+.icon-btn{background:var(--grad);color:#fff;
+  box-shadow:2.5px 2.5px 0 rgba(34,48,31,.8),inset 0 2px 0 rgba(255,255,255,.42)}
+.icon-btn svg{filter:drop-shadow(0 1px 0 rgba(20,40,25,.35))}
+.icon-btn:active{transform:translate(2px,2px);box-shadow:0.5px 0.5px 0 rgba(34,48,31,.8)}
+.gs-stageinfo span{font-weight:800;letter-spacing:2px}
+
+/* ── C. 主卡：白卡贴纸化（menu-btn 同款：双层影 + 大圆角 + 墨黑描边） ── */
+.hub-main{padding:12px}
+.ec-card{background:rgba(255,255,255,.97);border:2px solid rgba(26,36,28,.85);border-radius:18px;
+  padding:12px;box-shadow:0 8px 22px rgba(20,36,24,.16),5px 5px 0 rgba(26,36,28,.28)}
+
+/* ── D. 卡头双签：场景签渐变化（图一金标牌语言）+ 时机签保留胶囊 ── */
+.ec-tag{background:var(--grad);color:#fff;text-shadow:1px 1px 0 rgba(20,40,25,.4);
+  border:1.5px solid rgba(26,36,28,.8);border-radius:6px;padding:3px 10px;
+  box-shadow:2px 2px 0 rgba(26,36,28,.32)}
+.ec-tag.ghost{background:var(--card);border:1.5px solid rgba(26,36,28,.45);color:var(--dim);
+  text-shadow:none;box-shadow:none}
+
+/* ── E. 标题条：主题渐变横幅 + 白/墨双 ring（主菜单 mh-accent 同款） ── */
+.ec-title{background:var(--grad);color:#fff;text-shadow:1px 2px 0 rgba(20,40,25,.48);
+  box-shadow:0 0 0 2px rgba(255,255,255,.92),0 0 0 3.5px rgba(26,36,28,.72),4px 5px 0 rgba(26,36,28,.3)}
+
+/* ── F. 插画/结算图统一描边语言（黑度从纯黑降到墨黑，与全卡一致） ── */
+.ec-art{border-color:rgba(26,36,28,.85);border-radius:12px;box-shadow:4px 4px 0 rgba(26,36,28,.42)}
+.settle-art{border:2px solid rgba(26,36,28,.85);border-radius:12px;box-shadow:4px 4px 0 rgba(26,36,28,.42)}
+
+/* ── G. 按钮家族：内高光上强度（逐变体重写，避免相互覆盖硬阴影） ── */
+.btn{box-shadow:inset 0 1.5px 0 rgba(255,255,255,.5),2.5px 2.5px 0 rgba(26,36,28,.35)}
+.btn-primary{box-shadow:inset 0 1.5px 0 rgba(255,255,255,.4),3px 3px 0 rgba(21,54,30,.45)}
+.btn-gold{box-shadow:inset 0 1.5px 0 rgba(255,255,255,.5),3px 3px 0 rgba(139,98,26,.4)}
+.btn-danger{box-shadow:inset 0 1.5px 0 rgba(255,255,255,.28),3px 3px 0 rgba(90,25,14,.45)}
+.btn-sm{box-shadow:inset 0 1px 0 rgba(255,255,255,.45),2px 2px 0 rgba(34,48,31,.25)}
+
+/* ── H. 底栏 Dock：墨黑顶线 + 选中页签图标徽章化（mb-ico 微缩版） ── */
+.hub-dock{border-top:2px solid rgba(26,36,28,.85)}
+.dock-tab.on{background:var(--mint);border-color:rgba(26,36,28,.28)}
+.dock-tab.on .dock-ico{width:36px;height:26px;border-radius:9px;background:var(--grad);color:#fff;
+  border:1.5px solid rgba(26,36,28,.8);opacity:1;
+  box-shadow:2px 2px 0 rgba(26,36,28,.3),inset 0 1.5px 0 rgba(255,255,255,.4)}
+.dock-tab.on .dock-ico svg{filter:drop-shadow(0 1px 0 rgba(20,40,25,.3))}
+.dock-tab.on .dock-lb{font-weight:900}
+
+/* ── I. 子页标题斜体化（图一标题语言：粗斜体 + 大字距） ── */
+.screen-title,.page-head,.sheet-title{font-style:italic}
+
+/* ── J. 分隔线墨线对齐（比赛屏 / 覆盖层头部底脚） ── */
+.m-head{border-bottom:2px solid rgba(26,36,28,.85)}
+.m-controls{border-top:2px solid rgba(26,36,28,.85)}
+.sheet-head{border-bottom:2px solid rgba(26,36,28,.85)}
+.sheet-foot{border-top:2px solid rgba(26,36,28,.85)}
+.hub-sheet{background-image:radial-gradient(rgba(34,48,31,.05) 1px,transparent 1px);background-size:5px 5px}
+
+/* ── K. 章回卡 / 面板圆角微调（贴纸感统一 16px 级） ── */
+.ch-card{border:2px solid rgba(26,36,28,.85);box-shadow:var(--shadow-lift),5px 5px 0 rgba(26,36,28,.25)}
+.panel{border-radius:16px}
+
+/* ── L. P328 卡组回看条 + 冻结快照分页查看器（与 .ec-card 同一套变量，画面统一） ── */
+.pg-strip{display:flex;align-items:center;gap:10px;margin:0 0 8px;font-size:12px;color:var(--text-dim)}
+.pg-strip .pg-back{border:1px solid var(--line, rgba(0,0,0,.15));background:var(--panel);color:var(--text);
+  border-radius:10px;padding:4px 12px;cursor:pointer;font-size:12px;font-weight:700}
+.pg-strip .pg-back:active{transform:translateY(1px)}
+.pg-strip .pg-tag{color:var(--gold);font-weight:700;letter-spacing:.5px}
+.pg-overlay{position:fixed;inset:0;z-index:120;background:rgba(10,13,18,.8);
+  -webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);
+  display:flex;align-items:center;justify-content:center;padding:18px}
+.pg-overlay .pg-view{width:min(560px,94vw);max-height:88vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+/* 冻结快照：只读回看——内容原样呈现（同一套 ec-card 骨架），按钮不可点 */
+.pg-frozen{pointer-events:none;filter:saturate(.92)}
+.pg-frozen .ec-card{min-height:auto}
+.pg-toolbar{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:12px;flex-wrap:wrap}
+.pg-toolbar .pg-nav{width:34px;height:34px;border-radius:50%;border:1px solid var(--line, rgba(0,0,0,.15));
+  background:var(--panel);color:var(--text);font-size:20px;line-height:1;cursor:pointer}
+.pg-toolbar .pg-nav:disabled{opacity:.3;cursor:default}
+.pg-toolbar .pg-dot{width:8px;height:8px;border-radius:50%;background:var(--line, rgba(0,0,0,.2));display:inline-block}
+.pg-toolbar .pg-dot.on{background:var(--gold);box-shadow:0 0 0 3px rgba(201,150,46,.18)}
+.pg-toolbar .pg-count{font-size:12px;color:var(--text-dim);min-width:44px;text-align:center}
+.pg-toolbar .pg-return{border:1px solid var(--gold);background:transparent;color:var(--gold);
+  border-radius:10px;padding:6px 14px;font-size:13px;font-weight:700;cursor:pointer;margin-left:6px}
+.pg-toolbar .pg-return:active{transform:translateY(1px)}

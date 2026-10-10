@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>冠军之心：足球生涯 · Champion's Heart</title>
+<meta http-equiv="Cache-Control" content="no-store" />
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48Y2lyY2xlIGN4PSc1MCcgY3k9JzUwJyByPSc0NicgZmlsbD0nIzNmYWU1YScgc3Ryb2tlPScjMWEyNDFjJyBzdHJva2Utd2lkdGg9JzQnLz48cGF0aCBkPSdNNTAgMjZsMjAgMTUtOCAyNEgzOGwtOC0yNHonIGZpbGw9JyMxYTI0MWMnLz48cGF0aCBkPSdNNTAgNHYyMk0xNCAzN2wxNiA0TTg2IDM3bC0xNiA0JyBzdHJva2U9JyMxYTI0MWMnIHN0cm9rZS13aWR0aD0nNCcgZmlsbD0nbm9uZScvPjwvc3ZnPg=="><!-- P239b：SR-002 整改——SVG payload 改 base64，源码不再含外部域名字面量；解码后 xmlns 命名空间声明保留（SVG 独立文档规范必需），浏览器零网络请求 -->
+<link rel="stylesheet" href="css/v2.css?v=111">
+<style id="colorbox-selection-styles">
+    body { user-select: none; -webkit-user-select: none; }
+    input, textarea { user-select: text; -webkit-user-select: text; }
+  </style>
+
+
+
+
+<link rel="stylesheet" href="local-mod.css">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="theme-color" content="#173c2d">
+</head>
+<body>
+<div id="app">
+
+  <!-- ══════════ 加载 ══════════ -->
+  <div id="screen-loading" class="screen">
+    <div class="center">
+      <div class="boot-ball"></div>
+      <h1 class="boot-title">冠军之心<i>足球生涯</i></h1>
+      <p class="boot-sub">HEART OF A CHAMPION · V2 SHELL</p>
+      <div class="boot-bar"><div class="boot-fill" id="boot-fill"></div></div>
+      <p class="boot-tip" id="boot-tip">正在启动引擎…</p>
+      <p class="boot-err" id="boot-err"></p>
+    </div>
+  </div>
+
+  <!-- ══════════ 主菜单 ══════════ -->
+  <div id="screen-menu" class="screen hidden">
+    <div class="menu-bg"></div>
+    <div class="menu-hero">
+      <div class="boot-ball small"></div>
+      <div class="mh-title"><span class="mh-accent">冠军之心</span><span class="mh-line2">足球生涯</span></div>
+      <div class="menu-tagline">绿茵 · FROM ZERO TO LEGEND</div>
+    </div>
+    <nav class="menu-actions" id="menu-buttons"></nav>
+    <p class="menu-foot">从野球场到世界之巅 · 真实球员 · 真实联赛</p>
+  </div>
+
+  <!-- ══════════ 创建 ══════════ -->
+  <div id="screen-create" class="screen hidden">
+    <div class="pad">
+      <h2 class="screen-title">故事，从这座球场开始</h2>
+      <div class="panel" id="create-form"></div>
+    </div>
+  </div>
+
+  <!-- ══════════ 签约揭示 ══════════ -->
+  <div id="screen-reveal" class="screen hidden">
+    <div class="reveal-bg"></div>
+    <div class="reveal-content">
+      <p class="reveal-kicker">官方宣布 · OFFICIAL ANNOUNCEMENT</p>
+      <h1 class="reveal-club" id="reveal-club"></h1>
+      <p class="reveal-league" id="reveal-league"></p>
+      <div class="reveal-card" id="reveal-card"></div>
+      <button class="btn btn-primary reveal-btn" id="reveal-sign"></button>
+    </div>
+  </div>
+
+  <!-- ══════════ 生涯主界面 ══════════ -->
+  <div id="screen-hub" class="screen hidden">
+    <!-- 顶栏 1:1 对齐篮球生涯：OVR 徽章 + 姓名/档案 + 右上角四宫格按钮 -->
+    <header class="hud">
+      <div class="gs-player">
+        <div class="ovr-badge"><div class="n" id="hud-ovr-n">–</div><div class="t">OVR</div></div>
+        <div class="gs-pinfo">
+          <div class="gs-pname" id="hud-pname"></div>
+          <div class="gs-pmeta" id="hud-pmeta"></div>
+        </div>
+      </div>
+      <div class="gs-icons">
+        <button class="icon-btn news-btn" id="btn-news" title="虎扑热议"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5c1.5 3.5-4 5.5-4 10a4 4 0 0 0 8 0c0-1.8-1-3.2-2-4.5 3.2.8 5.5 3.6 5.5 6.8A7.5 7.5 0 0 1 12 22a7.5 7.5 0 0 1-7.5-7.5C4.5 9 10 6.5 12 2.5z"/></svg><span class="news-badge hidden" id="news-badge">0</span></button>
+        <button class="icon-btn" id="btn-transfer" title="转会申请"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13"/><path d="M14 4.5L17.5 8 14 11.5"/><path d="M20 16H7"/><path d="M10 12.5L6.5 16l3.5 3.5"/></svg></button>
+        <button class="icon-btn" id="btn-settings" title="设置"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg></button>
+        <button class="icon-btn" id="btn-exit" title="返回主界面"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg></button>
+      </div>
+    </header>
+    <div class="gs-stageinfo" id="hud-stage"></div>
+    <main class="hub-main" id="hub-main"></main>
+    <!-- P51：底栏页面以覆盖层弹出，主页卡片原地保留（关掉即可继续推进时间） -->
+    <section class="hub-sheet" id="hub-sheet">
+      <div class="sheet-head">
+        <span class="sheet-title" id="sheet-title"></span>
+        <button class="btn btn-sm btn-ghost" id="sheet-close">返回卡片 ✕</button>
+      </div>
+      <div class="sheet-body" id="hub-sheet-body"></div>
+      <div class="sheet-foot"><button class="btn btn-primary btn-block" id="sheet-foot-close">收起，继续游戏 ▸</button></div>
+    </section>
+    <nav class="hub-dock" id="hub-dock"></nav>
+  </div>
+
+  <!-- ══════════ 虎扑热议（右上角按钮进入） ══════════ -->
+  <div id="screen-news" class="screen hidden">
+    <header class="hud">
+      <div style="display:flex;align-items:center;gap:10px">
+        <button class="btn btn-sm btn-ghost" id="news-back" style="width:auto;height:34px;padding:0 12px">◂ 返回</button>
+        <b id="news-title-bar" style="font-size:15px">虎扑热议</b>
+      </div>
+    </header>
+    <main class="hub-main" id="news-main"></main>
+  </div>
+
+  <!-- ══════════ 比赛 ══════════ -->
+  <div id="screen-match" class="screen hidden">
+    <header class="m-head">
+      <span class="team" id="m-home"></span>
+      <span class="score" id="m-score">0 : 0</span>
+      <span class="team" id="m-away"></span>
+      <div class="minute-row"><span id="m-minute">0'</span><div class="min-bar"><div id="m-minbar"></div></div></div>
+    </header>
+    <main class="m-feed" id="m-feed"></main>
+    <footer class="m-controls" id="m-controls"></footer>
+  </div>
+
+  <!-- ══════════ 弹窗 / Toast ══════════ -->
+  <div id="v2-modal-root"></div>
+  <div id="v2-toast-root"></div>
+</div>
+<script src="js/platform.js?v=111" defer></script><!-- P267：平台适配层（虎扑/TapTap桥/Web 探测 + 云KV/广告/排行榜统一原语；加载期零副作用零网络；TapTap 包在此行后由打包脚本注入 taptap_config.js + platform_web_ext.js） -->
+<!--TAPTAP_EXT_SCRIPTS-->
+<script src="js/theme.js?v=111" defer></script>
+<script src="js/icons.js?v=111" defer></script>
+<script src="js/trophy_art.js?v=111" defer></script><!-- P132：荣誉专属奖杯图标（单源 8 造型×8 分色，纯字符串 SVG 零依赖；消费点 = hub 荣誉陈列室 / legacy_hall 荣誉殿堂） -->
+<script src="js/poster_art_img.js?v=111" defer></script><!-- P161：海报美漫头图（AI 厚涂 data URL 内联零外链；须在 poster_art.js 前装载） -->
+<script src="js/poster_art.js?v=111" defer></script><!-- P153：分享海报矢量场景美术（6 场景×档次映射，零 <img> 根治 file:// tainted canvas；P161 起优先用 POSTER_ART_IMG 厚涂图，矢量仅兜底） -->
+<script src="js/track.js?v=111" defer></script><!-- P133：数据埋点（虎扑 ColorboxAI.track 唯一入口；非容器 no-op 降级；blk 台账见文件头） -->
+<script src="js/tutorial.js?v=111" defer></script><!-- P133：新手引导 v1（首个生涯 3 步引导 + 前 3 场比赛提示；零数值干预，旧档视为已完成） -->
+<script src="js/data_life.js?v=111" defer></script>
+<script src="js/data_hupu_flavor.js?v=111" defer></script>
+<script src="js/data_news.js?v=111" defer></script>
+<script src="js/data_commentary.js?v=111" defer></script>
+<script src="js/data_config_extra.js?v=111" defer></script>
+<script src="js/data_identity.js?v=111" defer></script>
+<script src="js/data_real_squads.js?v=111" defer></script>
+<script src="js/data_schedule_2014.js?v=111" defer></script>
+<script src="js/data_results_2014.js?v=111" defer></script>
+<script src="js/data_intl_windows.js?v=111" defer></script><!-- P100-B5：真实国际比赛日窗口表（friendlyTick 触发日/比赛日 + 生成式联赛避窗） --><!-- P100-B3：2014-15 名局直灌库+真实积分榜参考层（simulateRound 锚定消费） --><!-- P100-B2：2014-15 真实轮次日期表（纯数据；initSeason 装载时按联赛合并） --><!-- P100-A2：真实替补名单数据（纯声明，无依赖；必须在 data_real.js 之前 —— install() 装配时按队名合并） -->
+<script src="js/data_real.js?v=111" defer></script>
+<script src="js/data_transfer_styles.js?v=111" defer></script>
+<script src="js/data_nations.js?v=111" defer></script>
+<script src="js/data_endings.js?v=111" defer></script>
+<script src="js/data_eventcards.js?v=111" defer></script>
+<script src="js/data_pre_extra.js?v=111" defer></script>
+<script src="js/data_echoes.js?v=111" defer></script>
+<script src="js/data_mainline.js?v=111" defer></script>
+<script src="js/data_ms2.js?v=111" defer></script>
+<script src="js/data_branches2.js?v=111" defer></script>
+<script src="js/data_league.js?v=111" defer></script>
+<script src="js/data_offseason2.js?v=111" defer></script>
+<script src="js/data_league2.js?v=111" defer></script>
+<script src="js/data_league3.js?v=111" defer></script>
+<script src="js/data_league4.js?v=111" defer></script>
+<script src="js/data_league5.js?v=111" defer></script>
+<script src="js/data_cup2.js?v=111" defer></script>
+<script src="js/data_intl2.js?v=111" defer></script>
+<script src="js/data_cc.js?v=111" defer></script>
+<script src="js/data_cc2.js?v=111" defer></script>
+<script src="js/data_ms3.js?v=111" defer></script>
+<script src="js/data_ms4.js?v=111" defer></script>
+<script src="js/data_injury2.js?v=111" defer></script>
+<script src="js/data_transfer2.js?v=111" defer></script>
+<script src="js/data_offseason3.js?v=111" defer></script>
+<script src="js/data_daily.js?v=111" defer></script>
+<script src="js/data_daily_youth.js?v=111" defer></script><!-- P338：青训期日常卡池（通用/国内/国外三组，只在 phase=academy 抽取） -->
+<script src="js/data_mainline3.js?v=111" defer></script>
+<script src="js/data_tourney.js?v=111" defer></script>
+<script src="js/data_tail.js?v=111" defer></script>
+<script src="js/data_winter.js?v=111" defer></script>
+<script src="js/data_club_legends.js?v=111" defer></script><script src="js/data_club_schalke.js?v=111" defer></script><script src="js/data_club_gladbach.js?v=111" defer></script><script src="js/data_club_bayer.js?v=111" defer></script><script src="js/data_club_rbl.js?v=111" defer></script><script src="js/data_club_liverpool.js?v=111" defer></script><script src="js/data_club_tot.js?v=111" defer></script><script src="js/data_club_mci.js?v=111" defer></script><script src="js/data_club_mnu.js?v=111" defer></script><script src="js/data_club_ars.js?v=111" defer></script><script src="js/data_club_che.js?v=111" defer></script><script src="js/data_club_realmadrid.js?v=111" defer></script><script src="js/data_club_barcelona.js?v=111" defer></script><script src="js/data_club_atletico.js?v=111" defer></script><script src="js/data_club_juv.js?v=111" defer></script><script src="js/data_club_int.js?v=111" defer></script><script src="js/data_club_nap.js?v=111" defer></script><script src="js/data_club_rom.js?v=111" defer></script><script src="js/data_club_acm.js?v=111" defer></script><script src="js/data_club_bayern.js?v=111" defer></script><script src="js/data_club_psg.js?v=111" defer></script><script src="js/data_club_om.js?v=111" defer></script><script src="js/data_club_ol.js?v=111" defer></script><script src="js/data_club_gv.js?v=111" defer></script><script src="js/data_club_shp.js?v=111" defer></script><script src="js/data_club_bja.js?v=111" defer></script><script src="js/data_club_tan.js?v=111" defer></script><script src="js/data_club_shs.js?v=111" defer></script><script src="js/data_club_jsu.js?v=111" defer></script><script src="js/data_club_lno.js?v=111" defer></script>
+<script src="js/data_final.js?v=111" defer></script>
+<script src="js/data_cup.js?v=111" defer></script>
+<script src="js/data_injury.js?v=111" defer></script>
+<script src="js/data_legacy.js?v=111" defer></script>
+<script src="js/config.js?v=111" defer></script>
+<script src="js/pool.js?v=111" defer></script>
+<script src="js/potential.js?v=111" defer></script>
+<script src="js/legacy.js?v=111" defer></script>
+<script src="js/meta.js?v=111" defer></script>
+<script src="js/core.js?v=111" defer></script>
+<script src="js/systems.js?v=111" defer></script>
+<script src="js/position.js?v=111" defer></script>
+<script src="js/tactics.js?v=111" defer></script>
+<script src="js/duel_tables.js?v=111" defer></script>
+<script src="js/duel.js?v=111" defer></script>
+<script src="js/match.js?v=111" defer></script>
+<script src="js/season.js?v=111" defer></script><script src="js/division.js?v=111" defer></script>
+<script src="js/career.js?v=111" defer></script>
+<script src="js/finance.js?v=111" defer></script>
+<script src="js/news.js?v=111" defer></script>
+<script src="js/ads.js?v=111" defer></script>
+<script src="js/intl.js?v=111" defer></script>
+<script src="js/audio.js?v=111" defer></script>
+<script src="js/talents.js?v=111" defer></script>
+<script src="js/leaderboard.js?v=111" defer></script>
+<script src="js/card_host.js?v=111" defer></script>
+<script src="js/star_favor.js?v=111" defer></script>
+<script src="js/eventcards.js?v=111" defer></script>
+<script src="js/club/_reg.js?v=111" defer></script><script src="js/club/_shared.js?v=111" defer></script><script src="js/club/liv.js?v=111" defer></script><script src="js/club/tot.js?v=111" defer></script><script src="js/club/mci.js?v=111" defer></script><script src="js/club/mnu.js?v=111" defer></script><script src="js/club/ars.js?v=111" defer></script><script src="js/club/che.js?v=111" defer></script><script src="js/club/dor.js?v=111" defer></script><script src="js/club/bay.js?v=111" defer></script><script src="js/club/sch.js?v=111" defer></script><script src="js/club/bmg.js?v=111" defer></script><script src="js/club_events.js?v=111" defer></script><script src="js/club_events2.js?v=111" defer></script><script src="js/club_events3.js?v=111" defer></script><script src="js/club_events4.js?v=111" defer></script><script src="js/club_events5.js?v=111" defer></script><script src="js/club_events6.js?v=111" defer></script>
+<script src="js/youth_data.js?v=111" defer></script><!-- P99 批 1：青训派生数据（B8：club_events6 之后另起一行，不得插进链中间；本文件不重写 window.ClubEvents） -->
+<script src="js/youth.js?v=111" defer></script><!-- P99 批 2：青训逻辑/相位状态机（data 在前、逻辑在后；本文件不重写 window.ClubEvents，R18） -->
+<script src="js/offseason_dev.js?v=111" defer></script>
+<script src="js/fifa_points.js?v=111" defer></script>
+<script src="js/nation_dev.js?v=111" defer></script>
+<script src="js/transfer.js?v=111" defer></script>
+<script src="js/season_report.js?v=111" defer></script>
+<script src="js/injuries.js?v=111" defer></script>
+<script src="js/leaderboard_local.js?v=111" defer></script>
+<script src="js/world_board.js?v=111" defer></script><!-- P373 世界榜单（推演榜不落存档；仅 UI 点击时运行，soak 零漂移） -->
+<script src="js/chapters.js?v=111" defer></script>
+<script src="js/gameloop.js?v=111" defer></script>
+<script src="js/v2/kit.js?v=111" defer></script>
+<script src="js/v2/settlement.js?v=111" defer></script>
+<script src="js/v2/match.js?v=111" defer></script>
+<script src="js/v2/duel_ui.js?v=111" defer></script>
+<script src="js/v2/create.js?v=111" defer></script>
+<script src="js/v2/calendar.js?v=111" defer></script><!-- P100-A1：赛事日历（月历/列表 + 逐场勾选跳过）；须在 kit.js 之后、hub.js 之前 -->
+<script src="js/v2/hub.js?v=111" defer></script>
+<script src="js/v2/flow.js?v=111" defer></script>
+<script src="js/share_copy.js?v=111" defer></script>
+<script src="js/share.js?v=111" defer></script>
+<script src="js/v2/legacy_hall.js?v=111" defer></script><!-- S4：传奇陈列室（十席之墙/三标签详情/席位选择器/二次分享）；依赖 SeasonReport 与 SharePoster 的运行时数据，加载顺序在其后 -->
+<script src="js/v2/main.js?v=111" defer></script>
+<script src="js/sprite_map.js?v=111" defer></script>
+<script src="js/art_sprite.js?v=111" defer></script>
+<script src="local-mod.js" defer></script>
+</body>
+</html>
