@@ -719,3 +719,7 @@ button{font-family:inherit;color:inherit;background:none;border:none;cursor:poin
 .pg-toolbar .pg-return{border:1px solid var(--gold);background:transparent;color:var(--gold);
   border-radius:10px;padding:6px 14px;font-size:13px;font-weight:700;cursor:pointer;margin-left:6px}
 .pg-toolbar .pg-return:active{transform:translateY(1px)}
+
+/* Standalone: the training experience fill needs a visible default color. */
+.bar-row .b-fill{background:var(--gold,#e2b94c)}
+.bar-row .b-val.exp-pool-value{width:auto;min-width:48px;white-space:nowrap;font-variant-numeric:tabular-nums;font-size:12px}
