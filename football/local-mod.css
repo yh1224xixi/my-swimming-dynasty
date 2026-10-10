@@ -3,3 +3,5 @@
 @media(max-width:600px){#lm-launch{bottom:calc(82px + env(safe-area-inset-bottom));padding:9px 13px;font-size:12px}#lm-card{padding:18px;max-height:80dvh}#lm-card input[type=number]{width:125px;font-size:16px}}
 
 #lm-card details{border:1px solid #bccab9;border-radius:10px;padding:10px;margin:12px 0}#lm-card summary{font-weight:700;cursor:pointer;min-height:28px}#lm-card select{width:145px;max-width:50%;padding:8px;border:1px solid #a8bcac;border-radius:8px;background:white;color:#18352a;font-size:16px}#lm-card input[type=number]{box-sizing:border-box;max-width:50%;min-width:0}#lm-card label span{min-width:0}#lm-card details button{width:100%}#lm-apply{position:sticky;bottom:0;box-shadow:0 2px 8px #0002}#lm-card{width:min(520px,100%)}@media(max-width:600px){#lm-card details{padding:8px}#lm-card select{width:125px}#lm-card{max-height:85dvh}}
+
+#lm-season-progress{font-size:12px;margin-top:8px;color:#51685b}#lm-season-stop{margin-top:8px}#lm-card button[hidden]{display:none}#lm-card button:disabled{opacity:.6;cursor:wait}
