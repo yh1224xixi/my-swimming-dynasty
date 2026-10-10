@@ -77,7 +77,7 @@ for(const f of d.fixtures)delete f._scopeRecorded;
 w.FootballStats.ensure(d);w.FootballStats.ranking(d,'goals');assert.equal(d.stats.goals,oldTotal);assert.equal(d.money,oldMoney);
 assert.equal(w.FootballStats.leagueStats(d).apps,leagueApps);
 w.Flow.seasonEnd();assert.equal(d._lastCompetitionStats.season,season);assert.equal(w.FootballStats.leagueStats(d).apps,leagueApps);
-assert(w.document.body.textContent.includes('本次赛季快进汇总'));assert(w.document.body.textContent.includes('赛事分别统计'));
+assert(w.document.body.textContent.includes('本次赛季快进汇总'));assert(w.document.getElementById('hud-stage').textContent.includes('休赛期'));assert(w.document.getElementById('hud-pmeta').textContent.includes('休赛期'));assert(w.document.body.textContent.includes('赛事分别统计'));
 // Pause before a life choice, save/reload it, apply effects exactly once, then resume.
 d=career();d._stashedEvent={title:'测试代言',choices:[{text:'接受测试代言',effects:{money:1234}},{text:'婉拒测试代言',effects:{}}]};
 const money=d.money,paused=await w.FootballSeasonSim.run({pauseOnChoices:true});assert.equal(paused.pauseReason,'测试代言');assert.equal(d.money,money);
